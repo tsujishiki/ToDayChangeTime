@@ -14,20 +14,29 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionSecurityInterceptor implements HandlerInterceptor {
 
+    public String[] allowUrls;//还没发现可以直接配置不拦截的资源，所以在代码里面来排除
+
+    public void setAllowUrls(String[] allowUrls) {
+        this.allowUrls = allowUrls;
+    }
+
     public SessionSecurityInterceptor() {
         // TODO Auto-generated constructor stub
     }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HandlerMethod hm = (HandlerMethod)handler;
-        if("LoginController".equals(hm.getBean().getClass().getSimpleName())  && "login".equals(hm.getMethod().getName())){
-            return true;
+        String requestUrl = request.getRequestURI().replace(request.getContextPath(), "");
+        if(null != allowUrls && allowUrls.length>=1)
+            for(String url : allowUrls) {
+                if(requestUrl.contains(url)) {
+                return true;
+            }
         }
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
         if(user == null){
-            response.sendRedirect("/page/error.html");
+            response.sendRedirect("/");
             return false;
         }
         return true;

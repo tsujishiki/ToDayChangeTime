@@ -187,6 +187,13 @@
       <version>1.2</version>
     </dependency>
 
+    <!--验证码生成-->
+    <dependency>
+      <groupId>com.github.axet</groupId>
+      <artifactId>kaptcha</artifactId>
+      <version>0.0.9</version>
+    </dependency>
+
   </dependencies>
 
   <build>

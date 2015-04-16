@@ -1,8 +1,10 @@
 package org.soya.mcore.controller;
 
+import com.google.code.kaptcha.Constants;
 import org.soya.tdct.module.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,8 +20,8 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @RequestMapping(value = {"/login"},method = RequestMethod.POST)
-    public ModelAndView login(User user,HttpServletRequest request, HttpServletResponse response){
-        //用户校验
+    public ModelAndView login(User user,@RequestParam("kaptcha")String kaptchaPage,HttpServletRequest request, HttpServletResponse response){
+        String kaptchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         HttpSession session = request.getSession();
         session.setAttribute("user",user);
         return new ModelAndView("countryviewer");

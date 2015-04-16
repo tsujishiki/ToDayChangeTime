@@ -53,6 +53,7 @@
     <!-- 配置静态资源 -->
     <mvc:resources location="/resources/" mapping="/resources/**" />
     <mvc:resources location="/page/" mapping="/page/**" />
+    <mvc:resources location="/index.html" mapping="/" />
 
     <!-- 采用注解方式配置MVC -->
     <mvc:annotation-driven >
@@ -69,7 +70,15 @@
         <!-- 多个拦截器,顺序执行 -->
         <mvc:interceptor>
             <mvc:mapping path="/*" /><!-- 如果不配置或/*,将拦截所有的Controller -->
-            <bean class="org.soya.mcore.interceptor.SessionSecurityInterceptor"/>
+            <bean class="org.soya.mcore.interceptor.SessionSecurityInterceptor">
+                <property name="allowUrls">
+                    <list>
+                        <!-- 如果请求中包含以下路径，则不进行拦截 -->
+                        <value>/login</value>
+                        <value>/captcha-image</value>
+                    </list>
+                </property>
+            </bean>
         </mvc:interceptor>
     </mvc:interceptors>
 
