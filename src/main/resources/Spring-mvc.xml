@@ -39,11 +39,11 @@
     <!--</bean>-->
 
 
-    <!-- j视图解析器 -->
+    <!-- 视图解析器 -->
     <bean id="htmlViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/page/" />
-        <property name="suffix" value=".jsp" />
+        <property name="suffix" value=".html" />
         <property name="order" value="2" />
     </bean>
 
@@ -53,7 +53,6 @@
     <!-- 配置静态资源 -->
     <mvc:resources location="/resources/" mapping="/resources/**" />
     <mvc:resources location="/page/" mapping="/page/**" />
-    <mvc:resources location="/index.html" mapping="/" />
 
     <!-- 采用注解方式配置MVC -->
     <mvc:annotation-driven >

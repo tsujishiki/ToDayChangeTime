@@ -1,7 +1,7 @@
 package org.soya.tdct.service.impl;
 
 import org.soya.tdct.mapper.CountryMapper;
-import org.soya.tdct.module.Country;
+import org.soya.tdct.model.Country;
 import org.soya.tdct.service.CountrySer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

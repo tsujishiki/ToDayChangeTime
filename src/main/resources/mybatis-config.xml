@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>  
         <!--实体类别名 Country -->
-        <typeAlias type="org.soya.tdct.module.Country" alias="Country" />
+        <typeAlias type="org.soya.tdct.model.Country" alias="Country" />
     </typeAliases>  
     
 </configuration>

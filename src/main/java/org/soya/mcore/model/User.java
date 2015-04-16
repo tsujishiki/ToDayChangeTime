@@ -1,4 +1,4 @@
-package org.soya.tdct.module;
+package org.soya.mcore.model;
 
 /**
  * Created by FunkySoya on 2015/4/2.

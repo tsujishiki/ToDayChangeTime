@@ -1,6 +1,6 @@
 package org.soya.tdct.mapper;
 
-import org.soya.tdct.module.Country;
+import org.soya.tdct.model.Country;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package org.soya.tdct.service;
 
-import org.soya.tdct.module.Country;
+import org.soya.tdct.model.Country;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

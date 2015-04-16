@@ -7,6 +7,16 @@
          version="3.0">
     <display-name>Archetype Created Web Application</display-name>
 
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- html作为静态资源，加快页面载入速度-->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
     <!-- Enables use of HTTP methods PUT and DELETE,默认参数名: _method -->
     <filter>
         <filter-name>httpMethodFilter</filter-name>
@@ -67,8 +77,4 @@
         <session-timeout>30</session-timeout>
     </session-config>
     
-    <welcome-file-list>
-        <welcome-file>/page/index.html</welcome-file>
-    </welcome-file-list>
-
 </web-app>

@@ -1,4 +1,4 @@
-package org.soya.tdct.module;
+package org.soya.tdct.model;
 
 public class Country {
 

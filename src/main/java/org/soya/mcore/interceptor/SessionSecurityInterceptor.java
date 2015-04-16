@@ -1,7 +1,6 @@
 package org.soya.mcore.interceptor;
 
-import org.soya.tdct.module.User;
-import org.springframework.web.method.HandlerMethod;
+import org.soya.mcore.model.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
