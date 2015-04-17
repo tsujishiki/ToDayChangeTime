@@ -12,7 +12,13 @@ login.controller("LoginController",function($scope,$http) {
     $scope.login = login;
 
     $scope.Login = function(){
-        console.log($scope.login);
         $http.post("/login",$scope.login).success(function(data) {alert(data.msg);});
     }
+});
+
+$(function(){
+    $('#kaptchaImage').click(function () {//生成验证码
+        $(this).hide().attr('src', '/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
+        event.cancelBubble=true;
+    });
 });
