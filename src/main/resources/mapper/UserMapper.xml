@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.soya.mcore.mapper.UserMapper">
+
+	<select id="selectByName" parameterType="string" resultType="User">
+		select * from tuser where userName = #{userName}
+	</select>
+
+</mapper>

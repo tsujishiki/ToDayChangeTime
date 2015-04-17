@@ -27,8 +27,8 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestUrl = request.getRequestURI().replace(request.getContextPath(), "");
         if(null != allowUrls && allowUrls.length>=1)
-            for(String url : allowUrls) {
-                if(requestUrl.contains(url)) {
+        for(String url : allowUrls) {
+            if(requestUrl.contains(url)) {
                 return true;
             }
         }

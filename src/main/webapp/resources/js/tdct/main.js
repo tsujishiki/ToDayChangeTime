@@ -13,8 +13,6 @@ login.controller("LoginController",function($scope,$http) {
 
     $scope.Login = function(){
         console.log($scope.login);
-        $http.post("/login",{
-            form:$scope.login
-        }).success(function(response) {alert("succ");});
+        $http.post("/login",$scope.login).success(function(data) {alert(data.msg);});
     }
 });

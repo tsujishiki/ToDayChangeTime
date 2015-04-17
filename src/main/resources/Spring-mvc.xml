@@ -51,8 +51,7 @@
     <context:component-scan base-package="org.soya.tdct.controller;org.soya.mcore.controller" />
 
     <!-- 配置静态资源 -->
-    <mvc:resources location="/resources/" mapping="/resources/**" />
-    <mvc:resources location="/page/" mapping="/page/**" />
+    <!--<mvc:resources location="/resources/" mapping="/resources/**" />-->
 
     <!-- 采用注解方式配置MVC -->
     <mvc:annotation-driven >
@@ -68,7 +67,7 @@
     <mvc:interceptors>
         <!-- 多个拦截器,顺序执行 -->
         <mvc:interceptor>
-            <mvc:mapping path="/*" /><!-- 如果不配置或/*,将拦截所有的Controller -->
+            <mvc:mapping path="/**" /><!-- 如果不配置或/*,将拦截所有的Controller -->
             <bean class="org.soya.mcore.interceptor.SessionSecurityInterceptor">
                 <property name="allowUrls">
                     <list>

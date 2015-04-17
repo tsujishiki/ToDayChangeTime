@@ -71,7 +71,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.soya.tdct.mapper" />
+        <property name="basePackage" value="org.soya.tdct.mapper,org.soya.mcore.mapper" />
     </bean>
 
     <!--验证码配置-->

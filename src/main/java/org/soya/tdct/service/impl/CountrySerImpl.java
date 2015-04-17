@@ -27,5 +27,4 @@ public class CountrySerImpl implements CountrySer {
         return countryMapper.queryAllCountry();
     }
 
-
 }
