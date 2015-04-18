@@ -15,19 +15,16 @@
     <![endif]-->
 
     <style type="text/css">
-        div[class*="col-"]{
-            padding-top:5px;
-            padding-bottom:5px;
-        }
+        /*div[class*="col-"]{*/
+            /*padding-top:5px;*/
+            /*padding-bottom:5px;*/
+        /*}*/
 
-        .left{
-            text-align:left;
-            padding-left:2px;
+        input.ng-invalid {
+            border: 1px solid #ff6d20;
         }
-
-        .right{
-            text-align:right;
-            padding-right:2px;
+        input.ng-valid {
+            border: 1px solid #8bc703;
         }
     </style>
 
@@ -35,24 +32,27 @@
 <body>
 
 <div class="container" ng-app="login" ng-controller="LoginController">
-        <div class="row">
-            <div class="col-md-4 right"><span>用户名</span></div>
-            <div class="col-md-8"><input ng-model="login.userName" value="{{login.userName}}" class="input-sm"  ng-model="userName" type="text" placeholder="输入小明"/></div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 right"><span>密码</span></div>
-            <div class="col-md-8"><input ng-model="login.password" value="{{login.password}}" class="input-sm" type="password" placeholder="输入小秘" /></div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 right"><span>验证码</span></div>
-            <div class="col-md-8">
-                <input ng-model="login.kaptcha" class="input-sm" type="text" id="kaptcha" maxlength="4"/>
-                <img src="/captcha-image" title="看不清，点击换一张" width="60" height="26" id="kaptchaImage" />
+    <div class="col-md-4 col-md-offset-4">
+        <form role="form" name="loginForm" ng-submit="Login(loginForm.$valid)" class="form-horizontal" novalidate>
+            <div class="form-group  has-feedback">
+                <label for="userName">邮箱</label>
+                <input value="{{login.userName}}" class="form-control" id="userName" name="userName" ng-model="login.userName" type="email" required placeholder="输入小邮"/>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2 col-md-offset-4"><button ng-click="Login()" class="btn btn-default">登陆</button></div>
-        </div>
+            <div class="form-group  has-feedback">
+                <label for="password">密码</label>
+                <input value="{{login.password}}" class="form-control" id="password" name="password" type="password" ng-model="login.password" required placeholder="输入小秘"/>
+            </div>
+            <div class="form-group  has-feedback">
+                <label for="kaptcha">验证码</label>
+                <input ng-model="login.kaptcha" class="form-control" type="text" id="kaptcha" ng-model="login.kaptcha" minlength="4" maxlength="4" required/>
+                <div class="col-md-1"><img src="/captcha-image" title="看不清，点击换一张" width="60" height="32" id="kaptchaImage" /></div>
+            </div>
+            <div class="form-group text-center">
+                <input class="btn btn-primary" type="submit" ng-disabled="loginForm.$invalid" value="登陆" />
+                <input class="btn btn-primary btn-link" type="button" value="注册" />
+            </div>
+        </form>
+    </div>
 </div>
 
 <script src="/resources/js/angular.js"></script>

@@ -5,14 +5,12 @@
 var login = angular.module("login", []);
 
 login.controller("LoginController",function($scope,$http) {
-    var user = {};
-    login.userName = "abc";
-    login.password = "ccc";
-
-    $scope.login = login;
-
-    $scope.Login = function(){
-        $http.post("/login",$scope.login).success(function(data) {alert(data.msg);});
+    $scope.Login = function(isValid){
+        if(isValid) {
+            $http.post("/login", $scope.login).success(function (data) {
+                alert(data.msg);
+            });
+        }
     }
 });
 
