@@ -5,12 +5,16 @@
 var login = angular.module("login", []);
 
 login.controller("LoginController",function($scope,$http) {
-    $scope.Login = function(isValid){
+    $scope.login = function(isValid){
         if(isValid) {
             $http.post("/login", $scope.login).success(function (data) {
                 alert(data.msg);
             });
         }
+    }
+
+    $scope.toRegister = function(){
+        location.href = "/register.html"
     }
 });
 

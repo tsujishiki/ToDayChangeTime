@@ -1,0 +1,14 @@
+input.ng-invalid {
+    border: 1px solid #ff6d20;
+}
+
+input.ng-invalid-required {
+    border: 1px solid #ff6d20;
+}
+input.ng-valid {
+    border: 1px solid #8bc703;
+}
+
+input.ng-pristine {
+    border: 1px solid #8bc703;
+}
