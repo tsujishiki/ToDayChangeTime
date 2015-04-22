@@ -15,9 +15,13 @@ login.controller("LoginController",function($scope,$http) {
     $scope.login = function(isValid){
         if(isValid) {
             console.log($scope.form);
-            $http.post("/login", $scope.form).success(function (data) {
-                localStorage.setItem("userName",$scope.form.userName);
-                alert(data.msg);
+            $http.post("/login", $scope.form).success(function (obj) {
+                if(obj.status=="T") {
+                    $.cookie("userName", $scope.form.userName,{expires:7});
+                    $.cookie("token",obj.data);
+                }else{
+                    alert(data.msg);
+                }
             });
         }
     }
@@ -32,5 +36,7 @@ $(function(){
         $(this).hide().attr('src', '/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
         event.cancelBubble=true;
     });
+
+    $
 
 });

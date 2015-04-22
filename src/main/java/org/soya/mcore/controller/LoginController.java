@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.UUID;
 
 /**
  * Created by FunkySoya on 2015/4/13.
@@ -32,6 +33,7 @@ public class LoginController {
         String kaptchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         ReturnBody rbody = new ReturnBody();
         if(!kaptchaSession.equals(form.getKaptcha())){
+            rbody.setStatus("F");
             rbody.setMsg("验证码输入错误！");
             return rbody;
         }
@@ -40,14 +42,16 @@ public class LoginController {
 
         if(user != null){
             if(!user.getPassword().equals(EncryptUtil.doEncrypt(form.getPassword()))){
+                rbody.setStatus("F");
                 rbody.setMsg("密码错误！");
             }else{
-                rbody.setStatus("Success");
+                rbody.setStatus("T");
                 rbody.setMsg("Success");
                 rbody.setRedirectUrl("/");
-                rbody.setData(null);
+                rbody.setData(UUID.randomUUID());
             }
         }else{
+            rbody.setStatus("F");
             rbody.setMsg("用户名不存在！");
         }
         HttpSession session = request.getSession();
