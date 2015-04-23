@@ -1,5 +1,6 @@
 package org.soya.mcore.interceptor;
 
+import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
 import org.soya.mcore.service.UserSer;
 import org.soya.mcore.utils.ParameterUtil;
@@ -32,6 +33,8 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestUrl = request.getRequestURI().replace(request.getContextPath(), "");
 
+        ReturnBody rbody = new ReturnBody();
+
         if(null != allowUrls && allowUrls.length>=1) {
             for (String url : allowUrls) {
                 if (requestUrl.contains(url)) {
@@ -48,7 +51,10 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
 
             Map<String,String> cookieParam = ParameterUtil.cookiesToMap(request.getCookies());
             token = cookieParam.get("token");
-            userName = URLDecoder.decode(cookieParam.get("userName"), "utf-8");
+            userName = cookieParam.get("userName");
+            if(userName != null) {
+                userName = URLDecoder.decode(userName, "utf-8");
+            }
 
             if (token != null){
                 user = userSer.selectByName(userName);
@@ -57,15 +63,15 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
                     return true;
                 }else{
                     if(requestUrl.contains("/checkLogin")) {
-                        response.getWriter().print("F");
+                        rbody.setStatus("F");
                         return false;
                     }else{
-                        response.sendRedirect("/");
+                        rbody.setRedirectUrl("/");
                         return false;
                     }
                 }
             }else {
-                response.sendRedirect("/");
+                rbody.setRedirectUrl("/");
                 return false;
             }
         }

@@ -13,6 +13,7 @@ login.controller("LoginController",function($scope,$http) {
        } else{
            $scope.haslogin = false;
        }
+        console.log($scope.haslogin);
     });
 
     var form = {};

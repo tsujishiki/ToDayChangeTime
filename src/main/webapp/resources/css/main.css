@@ -12,3 +12,7 @@ input.ng-valid {
 input.ng-pristine {
     border: 1px solid #8bc703;
 }
+
+.t-invisible{
+    display: none;
+}

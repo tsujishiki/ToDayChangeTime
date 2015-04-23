@@ -20,25 +20,27 @@
 
 <div class="container" ng-app="login" ng-controller="LoginController">
     <div class="col-md-4 col-md-offset-4">
-        <form role="form" name="loginForm" ng-submit="login(loginForm.$valid)" ng-show="!haslogin" class="form-horizontal" novalidate>
-            <div class="form-group  has-feedback">
-                <label for="userName">邮箱</label>
-                <input value="{{form.userName}}" class="form-control" id="userName" name="userName" ng-model="form.userName" type="email" required placeholder="输入小邮"/>
-            </div>
-            <div class="form-group  has-feedback">
-                <label for="password">密码</label>
-                <input value="{{form.password}}" class="form-control" id="password" name="password" type="password" ng-model="form.password" required placeholder="输入小秘"/>
-            </div>
-            <div class="form-group  has-feedback">
-                <label for="kaptcha">验证码</label>
-                <input class="form-control" type="text" id="kaptcha" ng-model="form.kaptcha" minlength="4" maxlength="4" required/>
-                <img src="/captcha-image" title="看不清，点击换一张" width="60" height="32" id="kaptchaImage" />
-            </div>
-            <div class="form-group text-center">
-                <input class="btn btn-primary" type="submit" ng-disabled="!loginForm.$valid" value="登陆" />
-                <input class="btn btn-primary btn-link" type="button" value="注册" ng-click="toRegister()" />
-            </div>
-        </form>
+        <div ng-show="!haslogin">
+            <form role="form" name="loginForm" ng-submit="login(loginForm.$valid)" class="form-horizontal" novalidate>
+                <div class="form-group  has-feedback">
+                    <label for="userName">邮箱</label>
+                    <input ng-bind="form.userName" class="form-control" id="userName" name="userName" ng-model="form.userName" type="email" required placeholder="输入小邮"/>
+                </div>
+                <div class="form-group  has-feedback">
+                    <label for="password">密码</label>
+                    <input ng-bind="form.password" class="form-control" id="password" name="password" type="password" ng-model="form.password" required placeholder="输入小秘"/>
+                </div>
+                <div class="form-group  has-feedback">
+                    <label for="kaptcha">验证码</label>
+                    <input class="form-control" type="text" id="kaptcha" ng-model="form.kaptcha" minlength="4" maxlength="4" required/>
+                    <img src="/captcha-image" title="看不清，点击换一张" width="60" height="32" id="kaptchaImage" />
+                </div>
+                <div class="form-group text-center">
+                    <input class="btn btn-primary" type="submit" ng-disabled="!loginForm.$valid" value="登陆" />
+                    <input class="btn btn-primary btn-link" type="button" value="注册" ng-click="toRegister()" />
+                </div>
+            </form>
+        </div>
 
         <div ng-show="haslogin">
             <span class="label-info" >{{comeInfo}}</span>
