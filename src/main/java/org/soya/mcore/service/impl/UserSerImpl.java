@@ -19,4 +19,8 @@ public class UserSerImpl implements UserSer {
     public User selectByName(String userName) {
         return mapper.selectByName(userName);
     }
+
+    public int updateToken(String userId,String token) {
+        return mapper.updateToken(userId, token);
+    }
 }

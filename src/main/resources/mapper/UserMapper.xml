@@ -8,4 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from tuser where userName = #{userName}
 	</select>
 
+	<update id="updateToken" parameterType="String" >
+		update tuser set token=#{token} where userId=#{userId}
+	</update>
+
 </mapper>

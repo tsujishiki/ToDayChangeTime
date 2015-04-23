@@ -1,5 +1,6 @@
 package org.soya.mcore.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.soya.mcore.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
     User selectByName(String userName);
+
+    int updateToken(@Param("userId")String userId,@Param("token")String token);
 }

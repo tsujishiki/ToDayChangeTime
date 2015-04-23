@@ -14,3 +14,6 @@ CREATE TABLE `tuser` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `db_tdct`.`tuser`
+ADD COLUMN `token` VARCHAR(45) NULL AFTER `locked`;
+

@@ -8,6 +8,7 @@ import org.soya.mcore.model.User;
 import org.soya.mcore.service.UserSer;
 import org.soya.mcore.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -39,7 +42,7 @@ public class LoginController {
         }
 
         User user = userSer.selectByName(form.getUserName());
-
+        Map data = new HashMap();
         if(user != null){
             if(!user.getPassword().equals(EncryptUtil.doEncrypt(form.getPassword()))){
                 rbody.setStatus("F");
@@ -48,7 +51,13 @@ public class LoginController {
                 rbody.setStatus("T");
                 rbody.setMsg("Success");
                 rbody.setRedirectUrl("/");
-                rbody.setData(UUID.randomUUID());
+                String token = UUID.randomUUID().toString();
+                data.put("token", token);
+                data.put("nickName",user.getNickName());
+                data.put("userName",user.getUserName());
+                rbody.setData(data);
+
+                userSer.updateToken(user.getUserId(),token);
             }
         }else{
             rbody.setStatus("F");
@@ -56,6 +65,28 @@ public class LoginController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("user",user);
+        return rbody;
+    }
+
+    @RequestMapping(value = {"/checkLogin"},method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnBody checkLogin(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        ReturnBody rbody = new ReturnBody();
+        rbody.setStatus("T");
+        rbody.setData(user.getNickName());
+        return rbody;
+    }
+
+    @RequestMapping(value = {"/logoff"},method = RequestMethod.POST)
+    @ResponseBody
+    public ReturnBody logoff(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+
+        ReturnBody rbody = new ReturnBody();
+        rbody.setStatus("T");
         return rbody;
     }
 }

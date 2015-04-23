@@ -20,7 +20,7 @@
 
 <div class="container" ng-app="login" ng-controller="LoginController">
     <div class="col-md-4 col-md-offset-4">
-        <form role="form" name="loginForm" ng-submit="login(loginForm.$valid)" class="form-horizontal" novalidate>
+        <form role="form" name="loginForm" ng-submit="login(loginForm.$valid)" ng-show="!haslogin" class="form-horizontal" novalidate>
             <div class="form-group  has-feedback">
                 <label for="userName">邮箱</label>
                 <input value="{{form.userName}}" class="form-control" id="userName" name="userName" ng-model="form.userName" type="email" required placeholder="输入小邮"/>
@@ -39,12 +39,18 @@
                 <input class="btn btn-primary btn-link" type="button" value="注册" ng-click="toRegister()" />
             </div>
         </form>
+
+        <div ng-show="haslogin">
+            <span class="label-info" >{{comeInfo}}</span>
+            <input class="btn btn-primary btn-link" type="button" value="注销" ng-click="toLogoff()" />
+        </div>
     </div>
 </div>
 
-<script src="/resources/js/angular.js"></script>
 <script src="/resources/js/jquery-2.1.3.min.js"></script>
+<script src="/resources/js/jquery.cookie.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/angular.js"></script>
 <script src="/resources/js/tdct/main.js"></script>
 </body>
 </html>

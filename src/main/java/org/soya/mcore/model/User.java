@@ -16,6 +16,15 @@ public class User {
     private String photo;
     private String qq;
     private String locked;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getUserId() {
         return userId;
