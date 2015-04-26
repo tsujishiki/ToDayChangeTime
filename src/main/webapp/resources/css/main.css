@@ -16,3 +16,12 @@ input.ng-pristine {
 .t-invisible{
     display: none;
 }
+
+.ng-hide{
+    display: none;
+}
+
+#loginForm .form-group{
+    margin-right: 1%;
+    margin-left: 1%;
+}
