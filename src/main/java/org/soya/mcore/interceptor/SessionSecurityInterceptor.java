@@ -1,14 +1,14 @@
 package org.soya.mcore.interceptor;
 
+import org.soya.mcore.constant.Status;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
 import org.soya.mcore.service.UserSer;
-import org.soya.mcore.utils.ParameterUtil;
+import org.soya.mcore.util.ParameterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -63,7 +63,7 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
                     return true;
                 }else{
                     if(requestUrl.contains("/checkLogin")) {
-                        rbody.setStatus("F");
+                        rbody.setStatus(Status.FAILED);
                         return false;
                     }else{
                         rbody.setRedirectUrl("/");

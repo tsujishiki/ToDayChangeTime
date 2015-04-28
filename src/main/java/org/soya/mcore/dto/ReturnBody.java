@@ -5,16 +5,16 @@ package org.soya.mcore.dto;
  */
 public class ReturnBody {
 
-    private String status;
+    private int status;
     private String msg;
     private String redirectUrl;
     private Object data;
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

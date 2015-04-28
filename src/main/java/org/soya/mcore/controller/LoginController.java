@@ -1,6 +1,7 @@
 package org.soya.mcore.controller;
 
 import com.google.code.kaptcha.Constants;
+import org.soya.mcore.constant.Status;
 import org.soya.mcore.dto.LoginForm;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.mapper.UserMapper;
@@ -36,7 +37,7 @@ public class LoginController {
         String kaptchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         ReturnBody rbody = new ReturnBody();
         if(!kaptchaSession.equals(form.getKaptcha())){
-            rbody.setStatus("F");
+            rbody.setStatus(Status.FAILED);
             rbody.setMsg("验证码输入错误！");
             return rbody;
         }
@@ -45,10 +46,10 @@ public class LoginController {
         Map data = new HashMap();
         if(user != null){
             if(!user.getPassword().equals(EncryptUtil.doEncrypt(form.getPassword()))){
-                rbody.setStatus("F");
+                rbody.setStatus(Status.FAILED);
                 rbody.setMsg("密码错误！");
             }else{
-                rbody.setStatus("T");
+                rbody.setStatus(Status.SUCCESS);
                 rbody.setMsg("Success");
                 rbody.setRedirectUrl("/");
                 String token = UUID.randomUUID().toString();
@@ -60,7 +61,7 @@ public class LoginController {
                 userSer.updateToken(user.getUserId(),token);
             }
         }else{
-            rbody.setStatus("F");
+            rbody.setStatus(Status.FAILED);
             rbody.setMsg("用户名不存在！");
         }
         HttpSession session = request.getSession();
@@ -74,7 +75,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
         ReturnBody rbody = new ReturnBody();
-        rbody.setStatus("T");
+        rbody.setStatus(Status.SUCCESS);
         rbody.setData(user.getNickName());
         return rbody;
     }
@@ -86,7 +87,7 @@ public class LoginController {
         session.removeAttribute("user");
 
         ReturnBody rbody = new ReturnBody();
-        rbody.setStatus("T");
+        rbody.setStatus(Status.SUCCESS);
         return rbody;
     }
 }
