@@ -21,7 +21,26 @@ input.ng-pristine {
     display: none;
 }
 
+.checkinfo{
+    color: #ff0000;
+    padding-right: 5px;
+}
+
+.checkinfo span{
+    padding-left: 2px;
+    font-size: 12px;
+}
+
 #loginForm .form-group{
     margin-right: 1%;
     margin-left: 1%;
+}
+
+#kaptcha {
+    width: 80%;
+    display: inline-block;
+}
+
+#kaptchaImage {
+    width: 17%;
 }

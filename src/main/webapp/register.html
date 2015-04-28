@@ -19,33 +19,43 @@
         <div class="col-md-8 col-md-offset-2">
             <form role="form" name="registerForm" ng-submit="register(registerForm.$valid)" class="form-horizontal" autocomplete="off" novalidate>
                 <div class="form-group  has-feedback">
-                    <label for="userName">邮箱</label>
-                    <input class="form-control" id="userName" name="userName" ng-model="form.user.userName" type="email" required />
+                    <div class="input-group">
+                        <span class="input-group-addon">邮箱</span>
+                        <input class="form-control" id="userName" name="userName" ng-model="form.user.userName" type="email" required />
+                    </div>
                 </div>
                 <div class="form-group  has-feedback">
-                    <label for="nickName">昵称</label>
-                    <input class="form-control" id="nickName" name="nickName" ng-model="form.user.nickName" type="text" required/>
+                    <div class="input-group">
+                        <span class="input-group-addon">昵称</span>
+                        <input class="form-control" id="nickName" name="nickName" ng-model="form.user.nickName" type="text" required/>
+                    </div>
                 </div>
                 <div class="form-group  has-feedback">
-                    <label for="password">密码</label>
-                    <input class="form-control" id="password" name="password" ng-model="form.user.password" type="text" required/>
+                    <div class="input-group">
+                        <span class="input-group-addon">密码</span>
+                        <input class="form-control" id="password" name="password" ng-model="form.user.password" type="text" required/>
+                    </div>
                 </div>
                 <div class="form-group  has-feedback">
-                    <label for="passwordConfirm">密码确认</label>
-                    <input class="form-control" id="passwordConfirm" name="passwordConfirm" ng-model="form.user.passwordConfirm" type="text" required/>
+                    <div class="input-group">
+                        <span class="input-group-addon">密码确认</span>
+                        <input class="form-control" id="passwordConfirm" name="passwordConfirm" ng-model="form.user.passwordConfirm" type="text" required/>
+                    </div>
                 </div>
                 <div class="form-group  has-feedback">
-                    <label for="qq">QQ</label>
-                    <input class="form-control" id="qq" name="qq" ng-model="form.user.qq" type="text" ng-pattern="/^\d{5,10}$/">
+                    <div class="input-group">
+                        <span class="input-group-addon">QQ</span>
+                        <input class="form-control" id="qq" name="qq" ng-model="form.user.qq" type="text" ng-pattern="/^\d{5,10}$/">
+                    </div>
                 </div>
                 <div class="form-group  has-feedback">
-                    <label for="photo">头像</label>
-                    <input class="form-control" id="photo" name="photo" ng-model="form.user.photo" type="file" required/>
-                </div>
-                <div class="form-group  has-feedback">
-                    <label for="kaptcha">验证码</label>
-                    <input ng-model="form.kaptcha" class="form-control" type="text" id="kaptcha" ng-model="login.kaptcha" minlength="4" maxlength="4" required/>
-                    <div class="col-md-1"><img src="/captcha-image" title="看不清，点击换一张" width="60" height="32" id="kaptchaImage" /></div>
+                    <div>
+                        <div class="input-group">
+                            <span class="input-group-addon">验证码</span>
+                            <input ng-model="form.kaptcha" class="form-control" type="text" id="kaptcha" ng-model="login.kaptcha" minlength="4" maxlength="4" required/>
+                            <img  style="display:inline-block;margin-left:5px;" src="/captcha-image" title="看不清，点击换一张" height="32" id="kaptchaImage" />
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group  has-feedback">
                     <input type="checkbox" value="1" />&nbsp;同意XXXX协议
