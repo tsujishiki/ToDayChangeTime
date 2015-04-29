@@ -6,6 +6,6 @@ package org.soya.mcore.constant;
 public  class Status {
     public static final int SUCCESS = 3001;
     public static final int FAILED =  3002;
-    public static final int USERNAMEDUPLICATE =  3003;
-    public static final int NICKNAMEDUPLICATE =  3004;
+    public static final int USERNAME_DUPLICATE =  3003;
+    public static final int NICKNAME_DUPLICATE =  3004;
 }

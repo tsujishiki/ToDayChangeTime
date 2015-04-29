@@ -7,7 +7,7 @@ var login = angular.module("login", []);
 login.controller("LoginController",function($scope,$http) {
     //自动登陆验证
     $http.post("/checkLogin").success(function(obj){
-       if(obj.status==Status.SUCCESS()){
+       if(obj.status==Status.SUCCESS){
            $scope.haslogin = true;
            $scope.comeInfo = obj.data;
        } else{
@@ -21,7 +21,7 @@ login.controller("LoginController",function($scope,$http) {
     $scope.login = function(isValid){
         if(isValid) {
             $http.post("/login", $scope.form).success(function (obj) {
-                if(obj.status==Status.SUCCESS()) {
+                if(obj.status==Status.SUCCESS) {
                     $.cookie("userName",obj.data.userName,{expires: 7});
                     $.cookie("nickName",obj.data.nickName,{expires: 7});
                     $scope.comeInfo = obj.data.nickName;
@@ -44,7 +44,7 @@ login.controller("LoginController",function($scope,$http) {
 
     $scope.toLogoff = function(){
         $http.post("/logoff").success(function(obj){
-            if(obj.status==Status.SUCCESS()){
+            if(obj.status==Status.SUCCESS){
                 $.cookie("token", '', { expires: -1 });
                 $.cookie("nickName", '', { expires: -1 });
                 location.href = "/"

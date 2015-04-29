@@ -14,7 +14,15 @@ register.controller("registerController",function($scope,$http) {
     $scope.register = function(){
         if($scope.registerForm.$valid && $scope.checkMatch()) {
             $http.post("/register/new",$scope.form.user).success(function(data) {
-                console.log(data);
+                $scope.registerForm.userName.$error.unique = false;
+                $scope.registerForm.nickName.$error.unique = false;
+                if(data.status == Status.SUCCESS){
+
+                }else if(data.status == Status.USERNAME_DUPLICATE){
+                    $scope.registerForm.userName.$error.unique = true;
+                }else if(data.status == Status.NICKNAME_DUPLICATE){
+                    $scope.registerForm.nickName.$error.unique = true;
+                }
             }).error(function() {
 
             });
@@ -65,7 +73,7 @@ $(function(){
         this.type="password";
     });
 
-    $('#kaptchaImage').click(function () {//������֤��
+    $('#kaptchaImage').click(function () {//锟斤拷锟斤拷锟斤拷证锟斤拷
         $(this).hide().attr('src', '/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
         event.cancelBubble=true;
     });

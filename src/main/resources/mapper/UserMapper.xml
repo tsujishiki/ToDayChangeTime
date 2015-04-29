@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test= "userName != null">userName=#{userName,jdbcType=VARCHAR},</if >
 			<if test= "nickName != null">nickName=#{nickName,jdbcType=VARCHAR},</if >
 			<if test= "password != null">password=#{password,jdbcType=VARCHAR},</if >
-			<if test= "createDate != null">createDate=#{createDate,jdbcType=DATETIME},</if >
+			<if test= "createDate != null">createDate=#{createDate},</if >
 			<if test= "ip != null">ip=#{ip,jdbcType=VARCHAR},</if >
 			<if test= "photo != null">photo=#{photo,jdbcType=VARCHAR},</if >
 			<if test= "qq != null">qq=#{qq,jdbcType=VARCHAR},</if >

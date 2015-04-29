@@ -10,8 +10,8 @@ public class User {
     private String userName;
     private String nickName;
     private String password;
-    private String createDate;
-    private String lastLoginDate;
+    private Date createDate;
+    private Date lastLoginDate;
     private String ip;
     private String photo;
     private String qq;
@@ -58,19 +58,19 @@ public class User {
         this.password = password;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public String getLastLoginDate() {
+    public Date getLastLoginDate() {
         return lastLoginDate;
     }
 
-    public void setLastLoginDate(String lastLoginDate) {
+    public void setLastLoginDate(Date lastLoginDate) {
         this.lastLoginDate = lastLoginDate;
     }
 

@@ -37,6 +37,7 @@
                 </div>
                 <div class="col-md-4">
                     <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.nickName.$dirty && registerForm.nickName.$error.required"><span>是时候亮出小名了</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.nickName.$dirty && registerForm.nickName.$error.unique"><span>小名已存在,已存在,已存在....</span></span>
                 </div>
                 <div class="form-group  has-feedback col-md-8">
                     <div class="input-group form-item-full">

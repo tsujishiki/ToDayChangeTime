@@ -4,6 +4,7 @@ import org.soya.mcore.constant.Status;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
 import org.soya.mcore.service.UserSer;
+import org.soya.mcore.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class UserController {
     /**
      * @param user
      * @return
-     * ��֤�л����Ƿ����
+     * ��֤�л����Ƿ����?
      */
     @RequestMapping(value = {"/register/validUserName"},method = RequestMethod.POST)
     @ResponseBody
@@ -43,13 +44,14 @@ public class UserController {
         ReturnBody rbody = new ReturnBody();
         User validUser = userSer.selectByName(user.getUserName());
         if(validUser != null){
-            rbody.setStatus(Status.USERNAMEDUPLICATE);
-        }else if(userSer.selectByName(user.getUserName()) != null){
-            rbody.setStatus(Status.NICKNAMEDUPLICATE);
+            rbody.setStatus(Status.USERNAME_DUPLICATE);
+        }else if(userSer.selectByNickName(user.getNickName()) != null){
+            rbody.setStatus(Status.NICKNAME_DUPLICATE);
         }else {
+            user.setPassword(EncryptUtil.doEncrypt(user.getPassword()));
+            user.setCreateDate(new Date());
+            user.setUserId("3");
             userSer.addUser(user);
-            user.setCreateDate(new Date().toLocaleString());
-            user.setUserId("1");
             rbody.setStatus(Status.SUCCESS);
         }
 
