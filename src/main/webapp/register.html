@@ -21,13 +21,13 @@
                 <div class="form-group  has-feedback col-md-8">
                     <div class="input-group form-item-full">
                         <span class="input-group-addon form-item-label">邮箱</span>
-                        <input class="form-control" id="userName" name="userName" ng-model="form.user.userName" ensure-unique type="email" required />
+                        <input class="form-control" id="userName" name="userName" ng-model="form.user.userName" type="email" required />
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.userName.$dirty && registerForm.userName.$error.required"><span>请输入邮箱</span></span>
-                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.userName.$dirty && registerForm.userName.$error.email"><span>邮箱格式不正确</span></span>
-                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.userName.$dirty && registerForm.userName.$error.unique"><span>邮箱已存在</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.userName.$dirty && registerForm.userName.$error.required"><span>邮箱呢?</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.userName.$dirty && registerForm.userName.$error.email"><span>好神奇的邮箱格式,不是地球的吧</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.userName.$dirty && registerForm.userName.$error.unique"><span>邮箱已存在,已存在,已存在....</span></span>
                 </div>
                 <div class="form-group  has-feedback col-md-8">
                     <div class="input-group form-item-full">
@@ -36,25 +36,28 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.nickName.$dirty && registerForm.nickName.$error.required"><span>请输入昵称</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.nickName.$dirty && registerForm.nickName.$error.required"><span>是时候亮出小名了</span></span>
                 </div>
                 <div class="form-group  has-feedback col-md-8">
                     <div class="input-group form-item-full">
                         <span class="input-group-addon form-item-label">密码</span>
-                        <input class="form-control" id="password" name="password" ng-model="form.user.password" type="text" required/>
+                        <input class="form-control" id="password" name="password" ng-model="form.user.password" ng-minlength="5" ng-blur="checkMatch()" type="text" required />
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.password.$dirty && registerForm.password.$error.required"><span>请输入密码</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.password.$dirty && registerForm.password.$error.required"><span>密码都不要怎么出来混</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.password.$dirty && registerForm.password.$error.minlength"><span>太短了,竟然小于5位数</span></span>
                 </div>
                 <div class="form-group  has-feedback col-md-8">
                     <div class="input-group form-item-full">
                         <span class="input-group-addon form-item-label">密码确认</span>
-                        <input class="form-control" id="passwordConfirm" name="passwordConfirm" ng-model="form.user.passwordConfirm" type="text" required/>
+                        <input class="form-control" id="passwordConfirm" name="passwordConfirm" ng-model="form.user.passwordConfirm" ng-minlength="5" ng-blur="checkMatch()" type="text" required/>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.passwordConfirm.$dirty && registerForm.passwordConfirm.$error.required"><span>请输入密码确认</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.passwordConfirm.$dirty && registerForm.passwordConfirm.$error.required"><span>手抖输错了就不好了,快确认下</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.passwordConfirm.$dirty && registerForm.passwordConfirm.$error.minlength"><span>太短了,竟然小于5位数</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.passwordConfirm.$dirty && registerForm.passwordConfirm.$error.match"><span>这记性,两次密码都不一样</span></span>
                 </div>
                 <div class="form-group  has-feedback col-md-8">
                     <div class="input-group form-item-full">
@@ -63,21 +66,23 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.qq.$dirty && registerForm.qq.$error.pattern"><span>QQ号格式不正确</span></span>
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.qq.$dirty && registerForm.qq.$error.pattern"><span>这QQ号不是企鹅出的吧</span></span>
                 </div>
                 <div class="form-group  has-feedback col-md-8">
                     <div class="input-group form-item-full">
                         <span class="input-group-addon form-item-label">验证码</span>
-                        <input ng-model="form.kaptcha" class="form-control" type="text" id="kaptcha" ng-model="login.kaptcha" minlength="4" maxlength="4" required/>
+                        <input class="form-control" type="text" id="kaptcha" name="kaptcha" ng-model="login.kaptcha" minlength="4" maxlength="4" required/>
                         <img  style="display:inline-block;margin-left:5px;" src="/captcha-image" title="看不清，点击换一张" height="32" id="kaptchaImage" />
                     </div>
                 </div>
-                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="registerForm.kaptcha.$dirty && registerForm.kaptcha.$error.required"><span>没验证码我怎么可能让你过</span></span>
+                </div>
                 <div class="form-group  has-feedback col-md-12">
                     <input type="checkbox" value="1" />&nbsp;同意XXXX协议
                 </div>
                 <div class="form-group text-center col-md-12">
-                    <input class="btn btn-primary btn-sm" type="submit" ng-disabled="registerForm.$invalid" value="注册" />
+                    <input class="btn btn-primary btn-sm" type="submit" value="注册" />
                 </div>
             </form>
         </div>

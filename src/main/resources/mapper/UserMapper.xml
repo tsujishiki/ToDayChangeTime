@@ -8,6 +8,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from tuser where userName = #{userName}
 	</select>
 
+	<select id="selectByNickName" parameterType="string" resultType="User">
+		select * from tuser where nickName = #{nickName}
+	</select>
+
+	<insert id="insertUser" parameterType="User">
+		insert into tuser <include refid="UserSet" />
+	</insert>
+
+	<sql id="UserSet">
+		<set >
+			userId=#{userId,jdbcType=VARCHAR},
+			<if test= "userName != null">userName=#{userName,jdbcType=VARCHAR},</if >
+			<if test= "nickName != null">nickName=#{nickName,jdbcType=VARCHAR},</if >
+			<if test= "password != null">password=#{password,jdbcType=VARCHAR},</if >
+			<if test= "createDate != null">createDate=#{createDate,jdbcType=DATETIME},</if >
+			<if test= "ip != null">ip=#{ip,jdbcType=VARCHAR},</if >
+			<if test= "photo != null">photo=#{photo,jdbcType=VARCHAR},</if >
+			<if test= "qq != null">qq=#{qq,jdbcType=VARCHAR},</if >
+			<if test= "locked != null">locked=#{locked,jdbcType=TINYINT},</if >
+			<if test= "token != null">token=#{token,jdbcType=VARCHAR},</if >
+		</set>
+	</sql >
+
 	<update id="updateToken" parameterType="String" >
 		update tuser set token=#{token} where userId=#{userId}
 	</update>

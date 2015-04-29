@@ -11,35 +11,50 @@ register.controller("registerController",function($scope,$http) {
     form.user = user;
 
     $scope.form = form;
-    $scope.register = function(isValid){
-        if(isValid) {
-            //do something
-        }
-    }
-});
+    $scope.register = function(){
+        if($scope.registerForm.$valid && $scope.checkMatch()) {
+            $http.post("/register/new",$scope.form.user).success(function(data) {
+                console.log(data);
+            }).error(function() {
 
-register.directive("ensureUnique", function($http) {
-    return {
-        restrict: 'AE',
-        require: 'ngModel',
-        link: function(scope, ele, attrs, ctrl) {
-            scope.$watch(attrs.ngModel, function() {
-                if(scope.form.user.userName){
-                    $http.post("/register/validUserName",{"userName":scope.form.user.userName}).success(function(data, status, headers, cfg) {
-                        if(data.status == Status.FAILED){
-                            ctrl.$setValidity('unique', true);
-                        }else{
-                            ctrl.$setValidity('unique', false);
-                        }
-                    }).error(function(data, status, headers, cfg) {
-                        ctrl.$setValidity('unique', false);
-                    });
+            });
+        }else{
+            angular.forEach($scope.registerForm,function(e){
+                if(typeof(e) == "object" && typeof(e.$dirty) == "boolean"){
+                    e.$dirty = true;
                 }
             });
         }
     }
-});
 
+    $scope.validExists = function(){
+        if($scope.form.user.userName){
+            $http.post("/register/validUserName",{"userName":$scope.form.user.userName}).success(function(data) {
+                if(data.status == Status.FAILED()){
+                    $scope.registerForm.userName.$error.unique = true;
+                    $scope.registerForm.$invalid = true;
+                    $scope.registerForm.$valid = false;
+                }else{
+                    $scope.registerForm.userName.$error.unique = false;
+                }
+            }).error(function() {
+                $scope.registerForm.userName.$error.unique=false;
+            });
+        }
+    };
+
+    $scope.checkMatch = function(){
+        var user = $scope.form.user;
+        if(user.password && user.passwordConfirm ){
+            if(user.password != user.passwordConfirm){
+                $scope.registerForm.passwordConfirm.$error.match=true;
+                return false;
+            }
+        }
+        $scope.registerForm.passwordConfirm.$error.match=false;
+        return true;
+    }
+});
 
 $(function(){
     $('#password').focus(function(){
@@ -50,7 +65,7 @@ $(function(){
         this.type="password";
     });
 
-    $('#kaptchaImage').click(function () {//Éú³ÉÑéÖ¤Âë
+    $('#kaptchaImage').click(function () {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½
         $(this).hide().attr('src', '/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
         event.cancelBubble=true;
     });

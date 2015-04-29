@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserSerImpl implements UserSer {
-
     @Autowired
     UserMapper mapper;
 
@@ -20,7 +19,17 @@ public class UserSerImpl implements UserSer {
         return mapper.selectByName(userName);
     }
 
+    @Override
     public int updateToken(String userId,String token) {
         return mapper.updateToken(userId, token);
+    }
+
+    @Override
+    public User selectByNickName(String nickName) {
+        return mapper.selectByNickName(nickName);
+    }
+
+    public int addUser(User user){
+        return mapper.insertUser(user);
     }
 }

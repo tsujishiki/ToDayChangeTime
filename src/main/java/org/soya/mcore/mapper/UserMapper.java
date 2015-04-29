@@ -11,5 +11,9 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
     User selectByName(String userName);
 
+    User selectByNickName(String nickName);
+
+    int insertUser(User user);
+
     int updateToken(@Param("userId")String userId,@Param("token")String token);
 }
