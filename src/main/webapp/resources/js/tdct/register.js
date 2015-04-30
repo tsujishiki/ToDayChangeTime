@@ -13,15 +13,18 @@ register.controller("registerController",function($scope,$http) {
     $scope.form = form;
     $scope.register = function(){
         if($scope.registerForm.$valid && $scope.checkMatch()) {
-            $http.post("/register/new",$scope.form.user).success(function(data) {
+            $http.post("/register/new",$scope.form).success(function(data) {
                 $scope.registerForm.userName.$error.unique = false;
                 $scope.registerForm.nickName.$error.unique = false;
+                $scope.registerForm.kaptcha.$error.invalid = false;
                 if(data.status == Status.SUCCESS){
 
                 }else if(data.status == Status.USERNAME_DUPLICATE){
                     $scope.registerForm.userName.$error.unique = true;
                 }else if(data.status == Status.NICKNAME_DUPLICATE){
                     $scope.registerForm.nickName.$error.unique = true;
+                }else if(data.status == Status.CAPTCHA_INVALID){
+                    $scope.registerForm.kaptcha.$error.invalid = true;
                 }
             }).error(function() {
 

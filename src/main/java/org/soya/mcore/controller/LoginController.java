@@ -8,6 +8,7 @@ import org.soya.mcore.mapper.UserMapper;
 import org.soya.mcore.model.User;
 import org.soya.mcore.service.UserSer;
 import org.soya.mcore.util.EncryptUtil;
+import org.soya.mcore.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.ui.ModelMap;
@@ -34,9 +35,8 @@ public class LoginController {
     @RequestMapping(value = {"/login"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody login(@RequestBody LoginForm form,HttpServletRequest request, HttpServletResponse response,ModelMap modelMap){
-        String kaptchaSession = (String)request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         ReturnBody rbody = new ReturnBody();
-        if(!kaptchaSession.equals(form.getKaptcha())){
+        if(!ValidUtil.validCaptcha(request,form.getKaptcha())){
             rbody.setStatus(Status.FAILED);
             rbody.setMsg("验证码输入错误！");
             return rbody;

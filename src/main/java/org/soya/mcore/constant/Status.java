@@ -8,4 +8,5 @@ public  class Status {
     public static final int FAILED =  3002;
     public static final int USERNAME_DUPLICATE =  3003;
     public static final int NICKNAME_DUPLICATE =  3004;
+    public static final int CAPTCHA_INVALID = 3005;
 }
