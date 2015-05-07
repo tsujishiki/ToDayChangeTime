@@ -2,11 +2,29 @@
  * Created by Administrator on 2015/4/16.
  */
 
-var login = angular.module("login", []);
+var app = angular.module("mainApp", ["ngRoute"]);
+//路由 模板设置
+app.config(['$routeProvider',function ($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'view/main.html',
+            controller: 'RouteMainCtl'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
+}]);
 
-login.controller("LoginController",function($scope,$http) {
+/******
+ * Controller
+ */
+app.controller("RouteMainCtl",function($scope,$http){
+
+})
+
+app.controller("LoginController",function($scope,$http) {
     //自动登陆验证
-    $http.post("/checkLogin").success(function(obj){
+    $http.post("/ajax/checkLogin").success(function(obj){
        if(obj.status==Status.SUCCESS){
            $scope.haslogin = true;
            $scope.comeInfo = obj.data;
@@ -20,7 +38,7 @@ login.controller("LoginController",function($scope,$http) {
 
     $scope.login = function(isValid){
         if(isValid) {
-            $http.post("/login", $scope.form).success(function (obj) {
+            $http.post("/ajax/login", $scope.form).success(function (obj) {
                 if(obj.status==Status.SUCCESS) {
                     $.cookie("userName",obj.data.userName,{expires: 7});
                     $.cookie("nickName",obj.data.nickName,{expires: 7});
@@ -43,7 +61,7 @@ login.controller("LoginController",function($scope,$http) {
     }
 
     $scope.toLogoff = function(){
-        $http.post("/logoff").success(function(obj){
+        $http.post("/ajax/logoff").success(function(obj){
             if(obj.status==Status.SUCCESS){
                 $.cookie("token", '', { expires: -1 });
                 $.cookie("nickName", '', { expires: -1 });
@@ -58,7 +76,7 @@ login.controller("LoginController",function($scope,$http) {
 
 $(function(){
     $('#kaptchaImage').click(function () {//生成验证码
-        $(this).hide().attr('src', '/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
+        $(this).hide().attr('src', '/ajax/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
         event.cancelBubble=true;
     });
 

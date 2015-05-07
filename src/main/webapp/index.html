@@ -16,10 +16,10 @@
 
 
 </head>
-<body>
+<body ng-app="mainApp">
 
 <!-- webbot bot="include" u-include="/page/error.html" TAG="BODY" -->
-<div class="container" ng-app="login" ng-controller="LoginController" >
+<div class="container"  ng-controller="LoginController" >
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header navbar-right">
@@ -74,7 +74,7 @@
                             <label for="kaptcha">验证码</label>
                             <div>
                                 <input class="form-control" type="text" id="kaptcha" name="kaptcha" ng-model="form.kaptcha" minlength="4" maxlength="4" required/>
-                                <img src="/captcha-image" title="看不清，点击换一张" height="32" id="kaptchaImage" />
+                                <img src="/ajax/captcha-image" title="看不清，点击换一张" height="32" id="kaptchaImage" />
                             </div>
                             <br>
                             <input type="checkbox" ng-model="form.isRemember">记住密码
@@ -95,12 +95,15 @@
             </div>
         </div>
     </div>
+
+    <div ng-view></div>
 </div>
 
 <script src="/resources/js/jquery-2.1.3.min.js"></script>
 <script src="/resources/js/jquery.cookie.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/angular.js"></script>
+<script src="/resources/js/angular-route.js"></script>
 <script src="/resources/js/tdct/Status.js"></script>
 <script src="/resources/js/tdct/main.js"></script>
 </body>

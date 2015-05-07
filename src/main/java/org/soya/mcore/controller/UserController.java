@@ -28,7 +28,7 @@ public class UserController {
      * @return
      * ��֤�л����Ƿ����?
      */
-    @RequestMapping(value = {"/register/validUserName"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/ajax/register/validUserName"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody ValidUserName(@RequestBody User user){
         ReturnBody rbody = new ReturnBody();
@@ -41,7 +41,7 @@ public class UserController {
         return rbody;
     }
 
-    @RequestMapping(value = {"/register/new"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/ajax/register/new"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody newUser(@RequestBody RegisterForm form,HttpServletRequest request){
         ReturnBody rbody = new ReturnBody();

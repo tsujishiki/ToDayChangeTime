@@ -85,7 +85,7 @@
                         <prop key="kaptcha.textproducer.font.color">red</prop>
                         <prop key="kaptcha.image.width">250</prop>
                         <prop key="kaptcha.textproducer.font.size">80</prop>
-                            <prop key="kaptcha.image.height">90</prop>
+                        <prop key="kaptcha.image.height">90</prop>
                         <prop key="kaptcha.session.key">code</prop>
                         <prop key="kaptcha.textproducer.char.length">4</prop>
                         <prop key="kaptcha.textproducer.font.names">华文彩云</prop><!--宋体,楷体,微软雅黑-->

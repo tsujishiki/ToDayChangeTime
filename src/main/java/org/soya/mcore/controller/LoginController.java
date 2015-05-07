@@ -32,7 +32,7 @@ public class LoginController {
     @Autowired
     UserSer userSer;
 
-    @RequestMapping(value = {"/login"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/ajax/login"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody login(@RequestBody LoginForm form,HttpServletRequest request, HttpServletResponse response,ModelMap modelMap){
         ReturnBody rbody = new ReturnBody();
@@ -69,7 +69,7 @@ public class LoginController {
         return rbody;
     }
 
-    @RequestMapping(value = {"/checkLogin"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/ajax/checkLogin"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody checkLogin(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -80,7 +80,7 @@ public class LoginController {
         return rbody;
     }
 
-    @RequestMapping(value = {"/logoff"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/ajax/logoff"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody logoff(HttpServletRequest request){
         HttpSession session = request.getSession();

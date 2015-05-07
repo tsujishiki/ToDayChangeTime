@@ -13,7 +13,7 @@ register.controller("registerController",function($scope,$http) {
     $scope.form = form;
     $scope.register = function(){
         if($scope.registerForm.$valid && $scope.checkMatch()) {
-            $http.post("/register/new",$scope.form).success(function(data) {
+            $http.post("/ajax/register/new",$scope.form.user).success(function(data) {
                 $scope.registerForm.userName.$error.unique = false;
                 $scope.registerForm.nickName.$error.unique = false;
                 $scope.registerForm.kaptcha.$error.invalid = false;
@@ -40,7 +40,7 @@ register.controller("registerController",function($scope,$http) {
 
     $scope.validExists = function(){
         if($scope.form.user.userName){
-            $http.post("/register/validUserName",{"userName":$scope.form.user.userName}).success(function(data) {
+            $http.post("/ajax/register/validUserName",{"userName":$scope.form.user.userName}).success(function(data) {
                 if(data.status == Status.FAILED()){
                     $scope.registerForm.userName.$error.unique = true;
                     $scope.registerForm.$invalid = true;
@@ -77,7 +77,7 @@ $(function(){
     });
 
     $('#kaptchaImage').click(function () {//锟斤拷锟斤拷锟斤拷证锟斤拷
-        $(this).hide().attr('src', '/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
+        $(this).hide().attr('src', '/ajax/captcha-image?' + Math.floor(Math.random()*100) ).fadeIn();
         event.cancelBubble=true;
     });
 });
