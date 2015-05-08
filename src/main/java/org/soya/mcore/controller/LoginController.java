@@ -32,15 +32,15 @@ public class LoginController {
     @Autowired
     UserSer userSer;
 
-    @RequestMapping(value = {"/ajax/login"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/login"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody login(@RequestBody LoginForm form,HttpServletRequest request, HttpServletResponse response,ModelMap modelMap){
         ReturnBody rbody = new ReturnBody();
-        if(!ValidUtil.validCaptcha(request,form.getKaptcha())){
-            rbody.setStatus(Status.FAILED);
-            rbody.setMsg("验证码输入错误！");
-            return rbody;
-        }
+//        if(!ValidUtil.validCaptcha(request,form.getKaptcha())){
+//            rbody.setStatus(Status.FAILED);
+//            rbody.setMsg("验证码输入错误！");
+//            return rbody;
+//        }
 
         User user = userSer.selectByName(form.getUserName());
         Map data = new HashMap();
@@ -69,7 +69,7 @@ public class LoginController {
         return rbody;
     }
 
-    @RequestMapping(value = {"/ajax/checkLogin"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/checkLogin"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody checkLogin(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -80,7 +80,7 @@ public class LoginController {
         return rbody;
     }
 
-    @RequestMapping(value = {"/ajax/logoff"},method = RequestMethod.POST)
+    @RequestMapping(value = {"/logoff"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody logoff(HttpServletRequest request){
         HttpSession session = request.getSession();

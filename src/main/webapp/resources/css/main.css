@@ -44,11 +44,3 @@ input.ng-pristine {
     margin-left: 1%;
 }
 
-#kaptcha {
-    width: 80%;
-    display: inline-block;
-}
-
-#kaptchaImage {
-    width: 17%;
-}

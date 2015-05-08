@@ -70,20 +70,18 @@
                             <label for="password">密码</label>
                             <input ng-bind="form.password" class="form-control" id="password" name="password" type="password" ng-model="form.password" required placeholder="输入小秘"/>
                         </div>
-                        <div class="form-group  has-feedback">
-                            <label for="kaptcha">验证码</label>
-                            <div>
-                                <input class="form-control" type="text" id="kaptcha" name="kaptcha" ng-model="form.kaptcha" minlength="4" maxlength="4" required/>
-                                <img src="/ajax/captcha-image" title="看不清，点击换一张" height="32" id="kaptchaImage" />
-                            </div>
-                            <br>
-                            <input type="checkbox" ng-model="form.isRemember">记住密码
-                        </div>
+                        <!--<div class="form-group  has-feedback">-->
+                            <!--<label for="kaptcha">验证码</label>-->
+                            <!--<input class="form-control " type="text" id="kaptcha" name="kaptcha" ng-model="form.kaptcha" minlength="4" maxlength="4" required/>-->
+                            <!--<img ng-src="/ajax/captcha-image" ng-click = "changeCaptcha($event)" title="看不清，点击换一张" height="32"  />-->
+                            <!--<br>-->
+                            <!--<input type="checkbox" ng-model="form.isRemember">记住密码-->
+                        <!--</div>-->
                         <div ng-show="!loginForm.$valid">
                             <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="loginForm.userName.$dirty && loginForm.userName.$error.required"><span>请输入邮箱</span></span>
                             <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="loginForm.userName.$dirty && loginForm.userName.$error.email"><span>邮箱格式不正确</span></span>
                             <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="loginForm.password.$dirty && loginForm.password.$error.required"><span>请输入密码</span></span>
-                            <span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="loginForm.kaptcha.$dirty && loginForm.kaptcha.$error.required"><span>请输入验证码</span></span>
+                            <!--<span class="glyphicon glyphicon-exclamation-sign checkinfo" ng-show="loginForm.kaptcha.$dirty && loginForm.kaptcha.$error.required"><span>请输入验证码</span></span>-->
                         </div>
                     </form>
                 </div>

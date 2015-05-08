@@ -100,7 +100,7 @@
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-        <url-pattern>/ajax/</url-pattern>
+        <url-pattern>/ajax/*</url-pattern>
     </filter-mapping>
 
     <listener>
@@ -125,7 +125,7 @@
     <!-- Map all *.spring requests to the DispatcherServlet for handling -->
     <servlet-mapping>
         <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/ajax/*</url-pattern>
     </servlet-mapping>
 
     <session-config>

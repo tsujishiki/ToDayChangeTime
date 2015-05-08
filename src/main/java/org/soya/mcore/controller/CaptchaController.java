@@ -26,7 +26,7 @@ public class CaptchaController {
         this.captchaProducer = captchaProducer;
     }
 
-    @RequestMapping("/ajax/captcha-image")
+    @RequestMapping("/captcha-image")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         response.setDateHeader("Expires", 0);
