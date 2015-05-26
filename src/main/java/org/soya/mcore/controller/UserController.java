@@ -61,7 +61,8 @@ public class UserController {
             formUser.setPassword(EncryptUtil.doEncrypt(formUser.getPassword()));
             formUser.setCreateDate(new Date());
             userSer.addUser(formUser);
-            rbody.setStatus(Status.SUCCESS);
+            rbody.setStatus(Status.DEFER_MESSAGE);
+            rbody.setMsg("注册成功");
         }
 
         return rbody;

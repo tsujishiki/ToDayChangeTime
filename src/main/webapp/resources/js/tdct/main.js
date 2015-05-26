@@ -5,22 +5,32 @@
 var app = angular.module("mainApp", ["ngRoute"]);
 
 /*****
+ * 全局变量
+ */
+app.value("loginInfo",{"hasLogin":false,"info":""});
+app.value("deferMsg",{"msg":""});
+
+/*****
  * Interceptor
  */
-app.factory('errorInterceptor', ["$q","$location",function($q,$location) {
-    var errorInterceptor = {
+app.factory('statusInterceptor', ["$q","$location","deferMsg",function($q,$location,deferMsg) {
+    var statusInterceptor = {
         response: function(response) {
             console.log(response);
             var deferred = $q.defer();
             if(response.data.status == Status.ERROR){
                 $location.path("/error");
                 return deferred.promise;
+            }else if(response.data.status == Status.DEFER_MESSAGE){
+                deferMsg.msg = response.data.msg;
+                $location.path("/deferMessage");
+                return deferred.promise;
             }else{
                 return response;
             }
         }
     };
-    return errorInterceptor;
+    return statusInterceptor;
 }]);
 
 /****
@@ -29,7 +39,7 @@ app.factory('errorInterceptor', ["$q","$location",function($q,$location) {
 app.config(["$routeProvider","$locationProvider","$httpProvider", function ($routeProvider,$locationProvider,$httpProvider) {
     $locationProvider.html5Mode(true);
 
-    $httpProvider.interceptors.push("errorInterceptor");
+    $httpProvider.interceptors.push("statusInterceptor");
 
     $routeProvider
         .when('/', {
@@ -48,15 +58,14 @@ app.config(["$routeProvider","$locationProvider","$httpProvider", function ($rou
             templateUrl: 'view/error.html',
             controller: 'RouteErrorCtl'
         })
+        .when('/deferMessage', {
+            templateUrl: 'view/deferMsg.html',
+            controller: 'RouteDeferMsgCtl'
+        })
         .otherwise({
             redirectTo: '/'
         });
 }]);
-
-/*****
- * 全局变量
- */
-app.value("loginInfo",{"hasLogin":false,"info":""});
 
 /******
  * Controller
@@ -68,6 +77,10 @@ app.controller("RouteMainCtl",function($scope,$http){
 app.controller("RouteErrorCtl",function($scope,$http){
 
 });
+
+app.controller("RouteDeferMsgCtl",["$scope","$http","deferMsg",function($scope,$http,deferMsg){
+    $scope.deferMsg = deferMsg;
+}]);
 
 app.controller("RouteLoginCtl",["$scope","$http","loginInfo",function($scope,$http,loginInfo){
     var form = {};
@@ -110,7 +123,7 @@ app.controller("RouteRegisterCtl",function($scope,$http){
                 $scope.registerForm.nickName.$error.unique = false;
                 $scope.registerForm.kaptcha.$error.invalid = false;
                 if(data.status == Status.SUCCESS){
-
+                    location.href = "/";
                 }else if(data.status == Status.USERNAME_DUPLICATE){
                     $scope.registerForm.userName.$error.unique = true;
                 }else if(data.status == Status.NICKNAME_DUPLICATE){
@@ -157,6 +170,10 @@ app.controller("RouteRegisterCtl",function($scope,$http){
         $scope.registerForm.passwordConfirm.$error.match=false;
         return true;
     }
+
+    $scope.changeCaptcha = function($event) {//生成验证码
+        $event.target.src = '/ajax/captcha-image?' + Math.floor(Math.random()*100);
+    };
 })
 
 

@@ -18,7 +18,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<sql id="UserSet">
 		<set >
-			userId=#{userId,jdbcType=VARCHAR},
 			<if test= "userName != null">userName=#{userName,jdbcType=VARCHAR},</if >
 			<if test= "nickName != null">nickName=#{nickName,jdbcType=VARCHAR},</if >
 			<if test= "password != null">password=#{password,jdbcType=VARCHAR},</if >
