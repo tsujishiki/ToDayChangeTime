@@ -3,9 +3,34 @@
  */
 
 var app = angular.module("mainApp", ["ngRoute"]);
-//路由 模板设置
-app.config(['$routeProvider',"$locationProvider", function ($routeProvider,$locationProvider) {
+
+/*****
+ * Interceptor
+ */
+app.factory('errorInterceptor', ["$q","$location",function($q,$location) {
+    var errorInterceptor = {
+        response: function(response) {
+            console.log(response);
+            var deferred = $q.defer();
+            if(response.data.status == Status.ERROR){
+                $location.path("/error");
+                return deferred.promise;
+            }else{
+                return response;
+            }
+        }
+    };
+    return errorInterceptor;
+}]);
+
+/****
+ *路由 模板设置
+ */
+app.config(["$routeProvider","$locationProvider","$httpProvider", function ($routeProvider,$locationProvider,$httpProvider) {
     $locationProvider.html5Mode(true);
+
+    $httpProvider.interceptors.push("errorInterceptor");
+
     $routeProvider
         .when('/', {
             templateUrl: 'view/main.html',
@@ -15,17 +40,61 @@ app.config(['$routeProvider',"$locationProvider", function ($routeProvider,$loca
             templateUrl: 'view/register.html',
             controller: 'RouteRegisterCtl'
         })
+        .when('/login', {
+            templateUrl: 'view/login.html',
+            controller: 'RouteLoginCtl'
+        })
+        .when('/error', {
+            templateUrl: 'view/error.html',
+            controller: 'RouteErrorCtl'
+        })
         .otherwise({
             redirectTo: '/'
         });
 }]);
+
+/*****
+ * 全局变量
+ */
+app.value("loginInfo",{"hasLogin":false,"info":""});
 
 /******
  * Controller
  */
 app.controller("RouteMainCtl",function($scope,$http){
 
-})
+});
+
+app.controller("RouteErrorCtl",function($scope,$http){
+
+});
+
+app.controller("RouteLoginCtl",["$scope","$http","loginInfo",function($scope,$http,loginInfo){
+    var form = {};
+    $scope.form = form;
+
+    $scope.login = function(isValid){
+        if(isValid) {
+            $http.post("/ajax/login", $scope.form).success(function (obj) {
+                if(obj.status==Status.SUCCESS) {
+                    $.cookie("userName",obj.data.userName,{expires: 7});
+                    $.cookie("nickName",obj.data.nickName,{expires: 7});
+                    if(form.isRemember){
+                        $.cookie("token",obj.data.token,{expires: 7});
+                    }
+                    loginInfo.info = obj.data.nickName;
+                    loginInfo.hasLogin = true;
+                    $scope.loginerror = false;
+                    location.href = "/"
+                }else{
+                    loginInfo.hasLogin = false;
+                    $scope.loginerror = true;
+                    $scope.loginerroinfo = obj.msg;
+                }
+            });
+        }
+    };
+}]);
 
 app.controller("RouteRegisterCtl",function($scope,$http){
     var form = {};
@@ -92,42 +161,25 @@ app.controller("RouteRegisterCtl",function($scope,$http){
 
 
 
-app.controller("LoginController",function($scope,$http,$location) {
+app.controller("HomeController",["$scope","$http","$location","loginInfo",function($scope,$http,$location,loginInfo) {
+    $scope.loginInfo  = loginInfo;
+
     //自动登陆验证
     $http.post("/ajax/checkLogin").success(function(obj){
         if(obj.status==Status.SUCCESS){
-            $scope.haslogin = true;
-            $scope.comeInfo = obj.data;
+            loginInfo.hasLogin = true;
+            loginInfo.info = obj.data;
         } else{
-            $scope.haslogin = false;
+            loginInfo.hasLogin = false;
         }
     });
 
-    var form = {};
-    $scope.form = form;
-
-    $scope.login = function(isValid){
-        if(isValid) {
-            $http.post("/ajax/login", $scope.form).success(function (obj) {
-                if(obj.status==Status.SUCCESS) {
-                    $.cookie("userName",obj.data.userName,{expires: 7});
-                    $.cookie("nickName",obj.data.nickName,{expires: 7});
-                    $scope.comeInfo = obj.data.nickName;
-                    if(form.isRemember){
-                        $.cookie("token",obj.data.token,{expires: 7});
-                    }
-                    $('#loginWin').modal('hide');
-                    $scope.haslogin = true;
-                }else{
-                    $scope.haslogin = false;
-                    alert(obj.msg);
-                }
-            });
-        }
-    };
-
     $scope.toRegister = function(){
         $location.path('register');
+    };
+
+    $scope.toLogin = function(){
+        $location.path('login');
     };
 
     $scope.toLogoff = function(){
@@ -143,7 +195,4 @@ app.controller("LoginController",function($scope,$http,$location) {
 
     };
 
-    $scope.changeCaptcha = function($event) {//生成验证码
-        $event.target.src = '/ajax/captcha-image?' + Math.floor(Math.random()*100);
-    };
-});
+}]);

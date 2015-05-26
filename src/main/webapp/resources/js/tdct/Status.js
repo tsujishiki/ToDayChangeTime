@@ -7,7 +7,8 @@ var Status = (function() {
         FAILED : 3002,
         USERNAME_DUPLICATE : 3003,
         NICKNAME_DUPLICATE : 3004,
-        CAPTCHA_INVALID : 3005
+        CAPTCHA_INVALID : 3005,
+        ERROR : 3006
     };
     return constant;
 })();

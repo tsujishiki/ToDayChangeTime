@@ -19,16 +19,16 @@
 <body ng-app="mainApp">
 
 <!-- webbot bot="include" u-include="/page/error.html" TAG="BODY" -->
-<div  ng-controller="LoginController" >
+<div  ng-controller="HomeController" >
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header navbar-right">
-                <div ng-show="!haslogin" class="ng-hide">
-                    <input type="button" class="btn-link navbar-brand" data-toggle="modal" data-target="#loginWin" value="登陆">
+                <div ng-show="!loginInfo.hasLogin" class="ng-hide">
+                    <input type="button" class="btn-link navbar-brand" ng-click="toLogin()" value="登陆">
                     <input type="button" class="btn-link navbar-brand" ng-click="toRegister()" value="注册">
                 </div>
-                <div ng-show="haslogin" class="ng-hide">
-                    <input class="btn btn-link navbar-brand" type="button" value="{{comeInfo}}"/>
+                <div ng-show="loginInfo.hasLogin" class="ng-hide">
+                    <input class="btn btn-link navbar-brand" type="button" value="{{loginInfo.info}}"/>
                     <input class="btn btn-link navbar-brand" type="button" value="注销" ng-click="toLogoff()" />
                 </div>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
