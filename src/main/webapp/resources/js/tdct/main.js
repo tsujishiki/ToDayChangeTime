@@ -95,12 +95,12 @@ app.controller("RouteRegisterCtl",function($scope,$http){
 app.controller("LoginController",function($scope,$http,$location) {
     //自动登陆验证
     $http.post("/ajax/checkLogin").success(function(obj){
-       if(obj.status==Status.SUCCESS){
-           $scope.haslogin = true;
-           $scope.comeInfo = obj.data;
-       } else{
-           $scope.haslogin = false;
-       }
+        if(obj.status==Status.SUCCESS){
+            $scope.haslogin = true;
+            $scope.comeInfo = obj.data;
+        } else{
+            $scope.haslogin = false;
+        }
     });
 
     var form = {};
@@ -147,6 +147,3 @@ app.controller("LoginController",function($scope,$http,$location) {
         $event.target.src = '/ajax/captcha-image?' + Math.floor(Math.random()*100);
     };
 });
-
-
-
