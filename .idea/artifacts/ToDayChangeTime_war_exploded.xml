@@ -22,6 +22,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.1.2.RELEASE" />
           <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:1.7.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-redis:1.5.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.2" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.34" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
@@ -47,7 +48,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="D:\Intellij Workspace\ToDayChangeTime\target/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="ToDayChangeTime/web/Web" />
     </root>
