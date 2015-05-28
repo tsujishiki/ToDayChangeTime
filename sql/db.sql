@@ -15,7 +15,7 @@ CREATE TABLE `tuser` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `db_tdct`.`bussiness` (
+CREATE TABLE `db_tdct`.`business` (
   `bussinessId` INT NOT NULL AUTO_INCREMENT, ##ID
   `gameName` VARCHAR(100) NOT NULL, ##名称
   `enName` VARCHAR(45) NULL, ##英文名称
