@@ -48,12 +48,3 @@ insert into dictionary (`category`,`name`,`code`,`enable`,`desc`) values
   ('区域','日本','JP',1,'Japan'),
   ('区域','韩国','ROK',1,'Republic of Korea'),
   ('区域','其他','O',1,'other');
-
-
-INSERT INTO `db_tdct`.`game`(`gameName`,`enName`,`jpName`,`typeId`,`maker`,`publisher`,`platformId`,`regionId`) VALUES
-  ('暗黑破坏神III','DIABLO Ⅲ',null,(select dictid from dictionary where name='角色扮演游戏'),'Blizzard','Blizzard',(select dictid from dictionary where name='PS4'),(select dictid from dictionary where name='亚洲')),
-  ('暗黑破坏神III','DIABLO Ⅲ',null,(select dictid from dictionary where name='角色扮演游戏'),'Blizzard','Blizzard',(select dictid from dictionary where name='PS3'),(select dictid from dictionary where name='亚洲')),
-  ('暗黑破坏神III','DIABLO Ⅲ',null,(select dictid from dictionary where name='角色扮演游戏'),'Blizzard','Blizzard',(select dictid from dictionary where name='XBOXONE'),(select dictid from dictionary where name='亚洲')),
-  ('暗黑破坏神III','DIABLO Ⅲ',null,(select dictid from dictionary where name='角色扮演游戏'),'Blizzard','Blizzard',(select dictid from dictionary where name='PC'),(select dictid from dictionary where name='亚洲')),
-  ('侠盗猎车手5','Grand Theft Auto V',null,(select dictid from dictionary where name='动作游戏'),'Rockstar North','Rockstar Games',(select dictid from dictionary where name='PS4'),(select dictid from dictionary where name='亚洲')),
-  ('侠盗猎车手5','Grand Theft Auto V',null,(select dictid from dictionary where name='动作游戏'),'Rockstar North','Rockstar Games',(select dictid from dictionary where name='PC'),(select dictid from dictionary where name='香港'));

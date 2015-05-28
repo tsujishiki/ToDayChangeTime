@@ -15,17 +15,25 @@ CREATE TABLE `tuser` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `db_tdct`.`game` (
-  `gameId` INT NOT NULL AUTO_INCREMENT, ##ID
+CREATE TABLE `db_tdct`.`bussiness` (
+  `bussinessId` INT NOT NULL AUTO_INCREMENT, ##ID
   `gameName` VARCHAR(100) NOT NULL, ##名称
   `enName` VARCHAR(45) NULL, ##英文名称
-  `jpName` VARCHAR(45) NULL, ##日文名称
-  `typeId` VARCHAR(2) NOT NULL, ##游戏类型
+  `typeCode` VARCHAR(10) NOT NULL, ##游戏类型
+  `platformCode` VARCHAR(10) NOT NULL, ##平台
+  `price` DECIMAL(9,2) NULL, #价格
+  `quality` TINYINT NOT NULL, #成色
+  `regionCode` VARCHAR(10) NULL, ##区域
+  `qq` VARCHAR(15) NULL , ##qq
   `maker` VARCHAR(45) NULL, ##开发商
-  `publisher` VARCHAR(45) NULL ##发行商,
-  `platformId` VARCHAR(2) NOT NULL, ##平台
-  `regionId` VARCHAR(2) NULL, ##区域
-  PRIMARY KEY (`gameId`));
+  `publisher` VARCHAR(45) NULL, ##发行商
+  `tradingWay` VARCHAR(10) NULL, ##交易方式
+  `location` VARCHAR(10) NULL,##发布者所在地
+  `createDate` TIMESTAMP NOT NULL,
+  `modifyDate` TIMESTAMP NOT NULL,
+  `creator` VARCHAR(10) NOT NULL,
+  `level` TINYINT NOT NULL  DEFAULT 0,#级别（通知，置顶等）
+  PRIMARY KEY (`bussinessId`));
 
 CREATE TABLE `db_tdct`.`dictionary` (
   `dictId` INT NOT NULL AUTO_INCREMENT, ##字典ID
