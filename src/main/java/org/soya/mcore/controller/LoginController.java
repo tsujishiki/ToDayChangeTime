@@ -10,6 +10,8 @@ import org.soya.mcore.service.UserSer;
 import org.soya.mcore.util.EncryptUtil;
 import org.soya.mcore.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpRequest;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -66,6 +68,7 @@ public class LoginController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("user",user);
+
         return rbody;
     }
 
