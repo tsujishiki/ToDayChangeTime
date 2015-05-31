@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * »ù±¾Êı¾İ
- * Êı¾İ´ÓredisÖĞ»ñÈ¡
+ * åŸºæœ¬æ•°æ®
+ * æ•°æ®ä»redisä¸­è·å–
  * Created by FunkySoya on 2015/5/31.
  */
 @Service
@@ -23,7 +23,7 @@ public class BaseDataSerImpl implements BaseDataSer {
     RedisTemplate redis;
 
     /**
-     * ¸ù¾İ×ÖµäÀàĞÍ»ñÈ¡×Öµä
+     * æ ¹æ®å­—å…¸ç±»å‹è·å–å­—å…¸
      * @param Type
      * @return List<Dictionary>
      */
@@ -45,7 +45,7 @@ public class BaseDataSerImpl implements BaseDataSer {
     }
 
     /**
-     * ¸ù¾İ×ÖµäÀàĞÍ»ñÈ¡×Öµä
+     * æ ¹æ®å­—å…¸ç±»å‹è·å–å­—å…¸
      * @param Type
      * @return Map
      */

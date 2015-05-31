@@ -5,7 +5,7 @@ import com.google.code.kaptcha.Constants;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Ð£Ñé¹¤¾ßÀà
+ * æ ¡éªŒå·¥å…·ç±»
  * Created by FunkySoya on 2015/5/7.
  */
 public class ValidUtil {

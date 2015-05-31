@@ -1,7 +1,7 @@
 package org.soya.mcore.constant;
 
 /**
- * ÏµÍ³×´Ì¬³£Á¿£¬·µ»Ø¶ÔÏó£¨ReturnBody£©ÖĞÇëÇó´¦Àí¸÷ÖÖ×´Ì¬
+ * ç³»ç»ŸçŠ¶æ€å¸¸é‡ï¼Œè¿”å›å¯¹è±¡ï¼ˆReturnBodyï¼‰ä¸­è¯·æ±‚å¤„ç†å„ç§çŠ¶æ€
  * Created by FunkySoya on 2015/4/28.
  */
 public  class Status {

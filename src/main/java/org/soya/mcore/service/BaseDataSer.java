@@ -13,14 +13,14 @@ import java.util.Map;
 public interface BaseDataSer {
 
     /**
-     * 根据字典类型获取字典
+     * 鏍规嵁瀛楀吀绫诲瀷鑾峰彇瀛楀吀
      * @param Type
      * @return List<Dictionary>
      */
     List<Dictionary> getListByCode(String Type);
 
     /**
-     * 根据字典类型获取字典
+     * 鏍规嵁瀛楀吀绫诲瀷鑾峰彇瀛楀吀
      * @param Type
      * @return Map
      */

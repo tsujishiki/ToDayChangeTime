@@ -5,35 +5,35 @@ import org.soya.mcore.model.User;
 import org.springframework.stereotype.Repository;
 
 /**
- * ÓÃ»§Mapper
+ * ç”¨æˆ·Mapper
  * Created by Administrator on 2015/4/17.
  */
 @Repository
 public interface UserMapper {
 
     /**
-     * ¸ù¾İÓÃ»§Ãû»ñÈ¡ÓÃ»§
+     * æ ¹æ®ç”¨æˆ·åè·å–ç”¨æˆ·
      * @param userName
      * @return User
      */
     User selectByName(String userName);
 
     /**
-     * ¸ù¾İêÇ³Æ»ñÈ¡ÓÃ»§
+     * æ ¹æ®æ˜µç§°è·å–ç”¨æˆ·
      * @param nickName
      * @return User
      */
     User selectByNickName(String nickName);
 
     /**
-     * ²åÈëÓÃ»§
+     * æ’å…¥ç”¨æˆ·
      * @param user
      * @return int
      */
     int insertUser(User user);
 
     /**
-     * ÓÃ»§µÇÂ¼ºó¸üĞÂÓÃ»§token
+     * ç”¨æˆ·ç™»å½•åæ›´æ–°ç”¨æˆ·token
      * @param userId
      * @param token
      * @return

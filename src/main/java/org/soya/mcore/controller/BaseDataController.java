@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 基础数据通用处理controller
+ * 鍩虹鏁版嵁閫氱敤澶勭悊controller
  * Created by FunkySoya on 2015/5/31.
  */
 

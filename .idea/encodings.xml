@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/constant/Status.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/controller/BaseDataController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/mapper/UserMapper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/model/Dictionary.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/model/User.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/service/BaseDataSer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/service/impl/BaseDataSerImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/util/ParameterUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/util/StringUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/mcore/util/ValidUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/controller/CountryController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/controller/LoginController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/controller/UserController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/mapper/CountryMapper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/model/Country.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/service/CountrySer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/service/UserSer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/service/impl/CountrySerImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/service/impl/UserSerImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/test/RunData.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/resources/js/tdct/Status.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/resources/js/tdct/main.js" charset="UTF-8" />

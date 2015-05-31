@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ²ÎÊı×ª»»
+ * å‚æ•°è½¬æ¢
  * Created by FunkySoya on 2015/4/23.
  */
 public class ParameterUtil {

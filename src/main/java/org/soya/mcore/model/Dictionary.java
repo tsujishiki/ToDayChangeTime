@@ -3,7 +3,7 @@ package org.soya.mcore.model;
 import java.io.Serializable;
 
 /**
- * ×Öµä
+ * å­—å…¸
  * Created by Administrator on 2015/5/28.
  */
 public class Dictionary implements Serializable {
