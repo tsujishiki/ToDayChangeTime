@@ -26,7 +26,7 @@ public class BaseDataController {
     @RequestMapping(value = {"/baseData/{code}"},method = RequestMethod.GET)
     @ResponseBody
     public ReturnBody getByCode(@PathVariable("code") String code) throws Exception {
-        List<Dictionary> dictList = baseDataSer.getByCode(code);
+        List<Dictionary> dictList = baseDataSer.getListByCode(code);
 
         ReturnBody returnBody = new ReturnBody();
         returnBody.setStatus(Status.SUCCESS);

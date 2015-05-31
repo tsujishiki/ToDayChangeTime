@@ -16,11 +16,12 @@ import java.net.URLDecoder;
 import java.util.Map;
 
 /**
+ * 验证用户权限
  * Created by FunkySoya on 2015/4/12.
  */
 public class SessionSecurityInterceptor implements HandlerInterceptor {
 
-    public String[] allowUrls;//还没发现可以直接配置不拦截的资源，所以在代码里面来排除
+    public String[] allowUrls;//不需要拦截的请求，配置文件中注入
 
     @Autowired
     UserSer userSer;

@@ -3,6 +3,7 @@ package org.soya.mcore.model;
 import java.util.Date;
 
 /**
+ * ”√ªß
  * Created by FunkySoya on 2015/4/2.
  */
 public class User {

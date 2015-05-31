@@ -12,5 +12,17 @@ import java.util.Map;
 
 public interface BaseDataSer {
 
-    List<Dictionary> getByCode(String code);
+    /**
+     * 根据字典类型获取字典
+     * @param Type
+     * @return List<Dictionary>
+     */
+    List<Dictionary> getListByCode(String Type);
+
+    /**
+     * 根据字典类型获取字典
+     * @param Type
+     * @return Map
+     */
+    Map getMapByCode(String Type);
 }

@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 基本数据
+ * 数据从redis中获取
  * Created by FunkySoya on 2015/5/31.
  */
 @Service
@@ -20,11 +22,16 @@ public class BaseDataSerImpl implements BaseDataSer {
     @Autowired
     RedisTemplate redis;
 
+    /**
+     * 根据字典类型获取字典
+     * @param Type
+     * @return List<Dictionary>
+     */
     @Override
-    public List<Dictionary> getByCode(String code) {
+    public List<Dictionary> getListByCode(String Type) {
         List<Dictionary> dictList = new ArrayList<>();
         Dictionary dict = null;
-        BoundHashOperations boundHashOperations = redis.boundHashOps(code);
+        BoundHashOperations boundHashOperations = redis.boundHashOps(Type);
 
         Map<String,String> map = boundHashOperations.entries();
 
@@ -35,5 +42,19 @@ public class BaseDataSerImpl implements BaseDataSer {
             dictList.add(dict);
         }
         return dictList;
+    }
+
+    /**
+     * 根据字典类型获取字典
+     * @param Type
+     * @return Map
+     */
+    @Override
+    public Map getMapByCode(String Type) {
+        BoundHashOperations boundHashOperations = redis.boundHashOps(Type);
+
+        Map<String,String> map = boundHashOperations.entries();
+
+        return map;
     }
 }

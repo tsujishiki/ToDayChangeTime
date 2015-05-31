@@ -1,6 +1,7 @@
 package org.soya.mcore.constant;
 
 /**
+ * 系统状态常量，返回对象（ReturnBody）中请求处理各种状态
  * Created by FunkySoya on 2015/4/28.
  */
 public  class Status {

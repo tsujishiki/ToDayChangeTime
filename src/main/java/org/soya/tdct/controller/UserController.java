@@ -24,9 +24,9 @@ public class UserController {
     UserSer userSer;
 
     /**
+     * 校验用户名
      * @param user
      * @return
-     * ��֤�л����Ƿ����?
      */
     @RequestMapping(value = {"/register/validUserName"},method = RequestMethod.POST)
     @ResponseBody
@@ -41,6 +41,12 @@ public class UserController {
         return rbody;
     }
 
+    /**
+     * 注册
+     * @param form
+     * @param request
+     * @return
+     */
     @RequestMapping(value = {"/register/new"},method = RequestMethod.POST)
     @ResponseBody
     public ReturnBody newUser(@RequestBody RegisterForm form,HttpServletRequest request){
