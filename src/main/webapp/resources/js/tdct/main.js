@@ -16,7 +16,6 @@ app.value("deferMsg",{"msg":""});
 app.factory('statusInterceptor', ["$q","$location","deferMsg",function($q,$location,deferMsg) {
     var statusInterceptor = {
         response: function(response) {
-            console.log(response);
             var deferred = $q.defer();
             if(response.data.status == Status.ERROR){
                 $location.path("/error");
@@ -62,6 +61,10 @@ app.config(["$routeProvider","$locationProvider","$httpProvider", function ($rou
             templateUrl: 'view/deferMsg.html',
             controller: 'RouteDeferMsgCtl'
         })
+        .when('/createBusiness', {
+            templateUrl: 'view/business/newBusiness.html',
+            controller: 'RouteNewBusinessCtl'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -70,12 +73,25 @@ app.config(["$routeProvider","$locationProvider","$httpProvider", function ($rou
 /******
  * Controller
  */
-app.controller("RouteMainCtl",function($scope,$http){
+app.controller("RouteMainCtl",['$scope','$http','$location',function($scope,$http,$location){
 
-});
+    $scope.createBusiness = function(){
+        $location.path("createBusiness");
+    };
+}]);
 
 app.controller("RouteErrorCtl",function($scope,$http){
 
+});
+
+app.controller("RouteNewBusinessCtl",function($scope,$http){
+    //游戏类型
+    $http.get("/ajax/baseData/gameType").success(function(obj){
+        console.log(obj);
+        if(obj.status==Status.SUCCESS) {
+            $scope.gameType = obj.data;
+        }
+    });
 });
 
 app.controller("RouteDeferMsgCtl",["$scope","$http","deferMsg",function($scope,$http,deferMsg){

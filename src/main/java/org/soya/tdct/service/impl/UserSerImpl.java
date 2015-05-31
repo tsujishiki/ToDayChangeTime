@@ -1,8 +1,8 @@
-package org.soya.mcore.service.impl;
+package org.soya.tdct.service.impl;
 
 import org.soya.mcore.mapper.UserMapper;
 import org.soya.mcore.model.User;
-import org.soya.mcore.service.UserSer;
+import org.soya.tdct.service.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

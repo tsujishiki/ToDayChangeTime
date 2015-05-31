@@ -1,21 +1,14 @@
-package org.soya.mcore.controller;
+package org.soya.tdct.controller;
 
-import com.google.code.kaptcha.Constants;
 import org.soya.mcore.constant.Status;
 import org.soya.mcore.dto.LoginForm;
 import org.soya.mcore.dto.ReturnBody;
-import org.soya.mcore.mapper.UserMapper;
 import org.soya.mcore.model.User;
-import org.soya.mcore.service.UserSer;
+import org.soya.tdct.service.UserSer;
 import org.soya.mcore.util.EncryptUtil;
-import org.soya.mcore.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.http.HttpRequest;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

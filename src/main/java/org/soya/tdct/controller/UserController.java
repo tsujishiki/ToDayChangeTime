@@ -1,10 +1,10 @@
-package org.soya.mcore.controller;
+package org.soya.tdct.controller;
 
 import org.soya.mcore.constant.Status;
 import org.soya.mcore.dto.RegisterForm;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
-import org.soya.mcore.service.UserSer;
+import org.soya.tdct.service.UserSer;
 import org.soya.mcore.util.EncryptUtil;
 import org.soya.mcore.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;

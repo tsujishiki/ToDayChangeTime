@@ -1,4 +1,4 @@
-package org.soya.mcore.service;
+package org.soya.tdct.service;
 
 import org.apache.ibatis.annotations.Param;
 import org.soya.mcore.model.User;
