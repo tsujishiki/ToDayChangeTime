@@ -17,12 +17,15 @@ app.factory('statusInterceptor', ["$q","$location","deferMsg",function($q,$locat
     var statusInterceptor = {
         response: function(response) {
             var deferred = $q.defer();
-            if(response.data.status == Status.ERROR){
+            if(response.data.status == Status.ERROR){//系统错误
                 $location.path("/error");
                 return deferred.promise;
-            }else if(response.data.status == Status.DEFER_MESSAGE){
+            }else if(response.data.status == Status.DEFER_MESSAGE){//延时消息提示
                 deferMsg.msg = response.data.msg;
                 $location.path("/deferMessage");
+                return deferred.promise;
+            }else if(response.data.status == Status.REDIRECT){//页面跳转
+                $location.path( response.data.redirectUrl);
                 return deferred.promise;
             }else{
                 return response;
@@ -87,7 +90,6 @@ app.controller("RouteErrorCtl",function($scope,$http){
 app.controller("RouteNewBusinessCtl",function($scope,$http){
     //游戏类型
     $http.get("/ajax/baseData/gameType").success(function(obj){
-        console.log(obj);
         if(obj.status==Status.SUCCESS) {
             $scope.gameType = obj.data;
         }

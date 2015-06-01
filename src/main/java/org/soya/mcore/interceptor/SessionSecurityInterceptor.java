@@ -1,5 +1,6 @@
 package org.soya.mcore.interceptor;
 
+import com.alibaba.fastjson.JSON;
 import org.soya.mcore.constant.Status;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
@@ -36,7 +37,7 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
 
         ReturnBody rbody = new ReturnBody();
 
-        if(null != allowUrls && allowUrls.length>=1) {
+        if (null != allowUrls && allowUrls.length >= 1) {
             for (String url : allowUrls) {
                 if (requestUrl.contains(url)) {
                     return true;
@@ -44,36 +45,50 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
             }
         }
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
-        if(user == null){
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
             //自动登录验证
             String token;
             String userName;
 
-            Map<String,String> cookieParam = ParameterUtil.cookiesToMap(request.getCookies());
+            Map<String, String> cookieParam = ParameterUtil.cookiesToMap(request.getCookies());
             token = cookieParam.get("token");
             userName = cookieParam.get("userName");
-            if(userName != null) {
+            if (userName != null) {
                 userName = URLDecoder.decode(userName, "utf-8");
+                user = userSer.selectByName(userName);
             }
 
-            if (token != null){
-                user = userSer.selectByName(userName);
-                if(user != null && token.equals(user.getToken())){
-                    request.getSession().setAttribute("user",user);
-                    return true;
-                }else{
-                    if(requestUrl.contains("/checkLogin")) {
+            if (requestUrl.contains("/checkLogin")) {
+                if (token != null) {
+                    if (user != null && token.equals(user.getToken())) {
+                        request.getSession().setAttribute("user", user);
+                        return true;
+                    } else {
                         rbody.setStatus(Status.FAILED);
                         return false;
-                    }else{
-                        rbody.setRedirectUrl("/");
+                    }
+                }else{
+                    rbody.setStatus(Status.FAILED);
+                    return false;
+                }
+            } else { //普通请求验证不通过转向登陆页面
+                if (token != null) {
+                    if (user != null && token.equals(user.getToken())) {
+                        request.getSession().setAttribute("user", user);
+                        return true;
+                    } else {
+                        rbody.setRedirectUrl("/login");
+                        rbody.setStatus(Status.REDIRECT);
+                        response.getWriter().print(JSON.toJSONString(rbody));
                         return false;
                     }
+                }else{
+                    rbody.setRedirectUrl("/login");
+                    rbody.setStatus(Status.REDIRECT);
+                    response.getWriter().print(JSON.toJSONString(rbody));
+                    return false;
                 }
-            }else {
-                rbody.setRedirectUrl("/");
-                return false;
             }
         }
         return true;

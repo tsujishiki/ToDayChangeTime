@@ -1,19 +1,39 @@
+package org.soya.mcore.service.impl;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.util.Map;
+import static org.junit.Assert.*;
 
-/**
- * Created by Administrator on 2015/5/28.
- */
-public class RunData {
+public class BaseDataSerImplTest {
 
-    public static void main (String[] args){
+    StringRedisTemplate redisTemplate = null;
+
+    @Before
+    public void setUp() throws Exception {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-config.xml");
-        StringRedisTemplate redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
+        redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
+    }
 
-        //redisTemplate.delete("redisTemplate");
+    @Test
+    public void testGetListByCode() throws Exception {
+
+    }
+
+    @Test
+    public void testGetMapByCode() throws Exception {
+
+    }
+
+    @Test
+    public void runData() throws Exception {
+        redisTemplate.delete("gameType");
+        redisTemplate.delete("platform");
+        redisTemplate.delete("edition");
 
         BoundHashOperations<String,String,String> gametype = redisTemplate.boundHashOps("gameType");
         gametype.put("ACT","动作游戏");
@@ -64,7 +84,5 @@ public class RunData {
         edition.put("JP","日版");
         edition.put("ROK","韩版");
         edition.put("OTHER","其他");
-
     }
-
 }

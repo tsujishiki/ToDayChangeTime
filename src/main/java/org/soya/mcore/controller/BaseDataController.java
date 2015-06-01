@@ -18,7 +18,7 @@ import java.util.Map;
  */
 
 @RestController
-public class BaseDataController {
+public class BaseDataController extends BaseController {
 
     @Autowired
     BaseDataSer baseDataSer;
@@ -26,8 +26,8 @@ public class BaseDataController {
     @RequestMapping(value = {"/baseData/{code}"},method = RequestMethod.GET)
     @ResponseBody
     public ReturnBody getByCode(@PathVariable("code") String code) throws Exception {
-        List<Dictionary> dictList = baseDataSer.getListByCode(code);
 
+        List<Dictionary> dictList = baseDataSer.getListByCode(code);
         ReturnBody returnBody = new ReturnBody();
         returnBody.setStatus(Status.SUCCESS);
         returnBody.setData(dictList);

@@ -1,6 +1,7 @@
 package org.soya.tdct.controller;
 
 import org.soya.mcore.constant.Status;
+import org.soya.mcore.controller.BaseController;
 import org.soya.mcore.dto.RegisterForm;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 
 @RestController
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     UserSer userSer;

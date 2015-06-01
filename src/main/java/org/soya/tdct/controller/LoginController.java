@@ -1,6 +1,7 @@
 package org.soya.tdct.controller;
 
 import org.soya.mcore.constant.Status;
+import org.soya.mcore.controller.BaseController;
 import org.soya.mcore.dto.LoginForm;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
@@ -22,7 +23,7 @@ import java.util.UUID;
  */
 
 @RestController
-public class LoginController {
+public class LoginController extends BaseController {
 
     @Autowired
     UserSer userSer;

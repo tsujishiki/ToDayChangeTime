@@ -18,7 +18,7 @@ import java.awt.image.BufferedImage;
  * 验证码生成
  */
 @RestController
-public class CaptchaController {
+public class CaptchaController extends BaseController{
     private Producer captchaProducer = null;
 
     @Autowired

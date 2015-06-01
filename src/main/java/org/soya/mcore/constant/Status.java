@@ -13,4 +13,5 @@ public  class Status {
     public static final int ERROR = 3006;
     public static final int DEFER_MESSAGE = 3007;
     public static final int INVALIDATE = 3008;
+    public static final int REDIRECT = 3009;
 }
