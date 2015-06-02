@@ -2,18 +2,17 @@
  * Created by Administrator on 2015/4/16.
  */
 
-var app = angular.module("mainApp", ["ngRoute"]);
+var app = angular.module("mainApp", ["ngRoute"])
 
 /*****
  * 全局变量
  */
-app.value("loginInfo",{"hasLogin":false,"info":""});
-app.value("deferMsg",{"msg":""});
+.value("deferMsg",{"msg":""})
 
 /*****
  * Interceptor
  */
-app.factory('statusInterceptor', ["$q","$location","deferMsg",function($q,$location,deferMsg) {
+.factory('statusInterceptor', ["$q","$location","deferMsg",function($q,$location,deferMsg) {
     var statusInterceptor = {
         response: function(response) {
             var deferred = $q.defer();
@@ -33,12 +32,12 @@ app.factory('statusInterceptor', ["$q","$location","deferMsg",function($q,$locat
         }
     };
     return statusInterceptor;
-}]);
+}])
 
 /****
  *路由 模板设置
  */
-app.config(["$routeProvider","$locationProvider","$httpProvider", function ($routeProvider,$locationProvider,$httpProvider) {
+.config(["$routeProvider","$locationProvider","$httpProvider", function ($routeProvider,$locationProvider,$httpProvider) {
     $locationProvider.html5Mode(true);
 
     $httpProvider.interceptors.push("statusInterceptor");
@@ -71,42 +70,39 @@ app.config(["$routeProvider","$locationProvider","$httpProvider", function ($rou
         .otherwise({
             redirectTo: '/'
         });
-}]);
+}])
 
 /******
  * Controller
  */
-app.controller("RouteMainCtl",['$scope','$http','$location',function($scope,$http,$location){
+.controller("RouteMainCtl",['$scope','$http','$location',function($scope,$http,$location){
 
     $scope.createBusiness = function(){
         $location.path("createBusiness");
     };
-}]);
+}])
+.controller("RouteErrorCtl",function($scope,$http){
 
-app.controller("RouteErrorCtl",function($scope,$http){
-
-});
-
-app.controller("RouteNewBusinessCtl",function($scope,$http){
+})
+.controller("RouteNewBusinessCtl",function($scope,$http){
     //游戏类型
     $http.get("/ajax/baseData/gameType").success(function(obj){
         if(obj.status==Status.SUCCESS) {
             $scope.gameType = obj.data;
         }
     });
-});
-
-app.controller("RouteDeferMsgCtl",["$scope","$http","deferMsg",function($scope,$http,deferMsg){
+})
+.controller("RouteDeferMsgCtl",["$scope","$http","deferMsg",function($scope,$http,deferMsg){
     $scope.deferMsg = deferMsg;
-}]);
-
-app.controller("RouteLoginCtl",["$scope","$http","loginInfo",function($scope,$http,loginInfo){
+}])
+.controller("RouteLoginCtl",["$scope","$http",function($scope,$http){
     var form = {};
     $scope.form = form;
 
     $scope.login = function(isValid){
         if(isValid) {
             $http.post("/ajax/login", $scope.form).success(function (obj) {
+                var loginInfo = {};
                 if(obj.status==Status.SUCCESS) {
                     $.cookie("userName",obj.data.userName,{expires: 7});
                     $.cookie("nickName",obj.data.nickName,{expires: 7});
@@ -122,12 +118,13 @@ app.controller("RouteLoginCtl",["$scope","$http","loginInfo",function($scope,$ht
                     $scope.loginerror = true;
                     $scope.loginerroinfo = obj.msg;
                 }
+                //派发登陆事件
+                $scope.$emit('onLogin', loginInfo);
             });
         }
     };
-}]);
-
-app.controller("RouteRegisterCtl",function($scope,$http){
+}])
+.controller("RouteRegisterCtl",function($scope,$http){
     var form = {};
     var user = {};
 
@@ -193,11 +190,15 @@ app.controller("RouteRegisterCtl",function($scope,$http){
         $event.target.src = '/ajax/captcha-image?' + Math.floor(Math.random()*100);
     };
 })
+.controller("HomeController",["$scope","$http","$location",function($scope,$http,$location) {
+    var loginInfo = {};
+    $scope.loginInfo = loginInfo;
 
-
-
-app.controller("HomeController",["$scope","$http","$location","loginInfo",function($scope,$http,$location,loginInfo) {
-    $scope.loginInfo  = loginInfo;
+    //监听登陆事件
+    $scope.$on("onLogin",function(d,data){
+        console.log(d);
+        loginInfo = data;
+    });
 
     //自动登陆验证
     $http.post("/ajax/checkLogin").success(function(obj){
@@ -223,8 +224,6 @@ app.controller("HomeController",["$scope","$http","$location","loginInfo",functi
                 $.cookie("token", '', { expires: -1 });
                 $.cookie("nickName", '', { expires: -1 });
                 location.href = "/"
-            }else{
-                alert(obj.msg);
             }
         });
 
