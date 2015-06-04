@@ -25,7 +25,7 @@ public class BaseDataController extends BaseController {
 
     @RequestMapping(value = {"/baseData/{type}"},method = RequestMethod.GET)
     @ResponseBody
-    public ReturnBody getByCode(@PathVariable("type") String type) throws Exception {
+    public ReturnBody getByType(@PathVariable("type") String type) throws Exception {
 
         List<Dictionary> dictList = baseDataSer.getListByType(type);
         ReturnBody returnBody = new ReturnBody();

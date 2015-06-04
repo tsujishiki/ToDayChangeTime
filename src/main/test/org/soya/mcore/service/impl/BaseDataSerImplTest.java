@@ -5,23 +5,34 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.BoundHashOperations;
+import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ScanResult;
+
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
 public class BaseDataSerImplTest {
 
     StringRedisTemplate redisTemplate = null;
+    Jedis jedis = null;
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-config.xml");
-        redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-config.xml");
+//        redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
+
+        jedis = new Jedis("127.0.0.1",6379);
+        jedis.auth("12345");
     }
 
     @Test
-    public void testGetListByCode() throws Exception {
-
+    public void testGetListByType() throws Exception {
+        ScanResult<Map.Entry<String, String>> gameType = jedis.hscan("gameType", "");
+        System.out.print(gameType);
     }
 
     @Test
