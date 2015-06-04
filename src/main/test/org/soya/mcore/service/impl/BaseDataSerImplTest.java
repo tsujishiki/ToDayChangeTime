@@ -2,18 +2,17 @@ package org.soya.mcore.service.impl;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.soya.mcore.model.Dictionary;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.BoundHashOperations;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.ScanResult;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 public class BaseDataSerImplTest {
 
@@ -22,8 +21,8 @@ public class BaseDataSerImplTest {
 
     @Before
     public void setUp() throws Exception {
-//        ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-config.xml");
-//        redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-config.xml");
+        redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
 
         jedis = new Jedis("127.0.0.1",6379);
         jedis.auth("12345");
@@ -31,8 +30,26 @@ public class BaseDataSerImplTest {
 
     @Test
     public void testGetListByType() throws Exception {
-        ScanResult<Map.Entry<String, String>> gameType = jedis.hscan("gameType", "");
-        System.out.print(gameType);
+//        ScanResult<Map.Entry<String, String>> gameType = jedis.hscan("gameType", "");
+//        System.out.print(gameType);
+
+        List<Dictionary> dictList = new ArrayList<>();
+        Dictionary dict = null;
+        BoundHashOperations boundHashOperations = redisTemplate.boundHashOps("gameType");
+
+        Map<String,String> map = boundHashOperations.entries();
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            dict = new Dictionary();
+            dict.setCode(entry.getKey());
+            dict.setName(entry.getValue());
+            dictList.add(dict);
+        }
+        //取出为map无序，此处排序
+        Collections.sort(dictList);
+        for(Dictionary obj : dictList){
+            System.out.println(obj.getName());
+        }
     }
 
     @Test
@@ -49,9 +66,9 @@ public class BaseDataSerImplTest {
         BoundHashOperations<String,String,String> gametype = redisTemplate.boundHashOps("gameType");
         gametype.put("ACT","动作游戏");
         gametype.put("AVG","冒险游戏");
-        gametype.put("FPS","第一人称视点射击游戏");
-        gametype.put("FTG","格斗游戏");
-        gametype.put("MUG","音乐游戏");
+        gametype.put("FPS", "第一人称视点射击游戏");
+        gametype.put("FTG", "格斗游戏");
+        gametype.put("MUG", "音乐游戏");
         gametype.put("PUZ","益智类游戏");
         gametype.put("RAC","赛车游戏");
         gametype.put("RPG","角色扮演游戏");
@@ -60,8 +77,8 @@ public class BaseDataSerImplTest {
         gametype.put("SPG","体育运动游戏");
         gametype.put("STG","射击游戏");
         gametype.put("TAB","桌面游戏");
-        gametype.put("ETC","其他类型游戏");
         gametype.put("AVG/ADV","恋爱养成游戏");
+        gametype.put("OTHER","其他类型游戏");
 
         BoundHashOperations<String,String,String> platform = redisTemplate.boundHashOps("platform");
         platform.put("PS4","PS4");
@@ -95,5 +112,17 @@ public class BaseDataSerImplTest {
         edition.put("JP","日版");
         edition.put("ROK","韩版");
         edition.put("OTHER","其他");
+
+        BoundHashOperations<String,String,String> quality = redisTemplate.boundHashOps("quality");
+        quality.put("99","九成九新");
+        quality.put("90","九成新");
+        quality.put("70","七成新");
+        quality.put("50","五成新");
+        quality.put("40","五成以下");
+
+        BoundHashOperations<String,String,String> tradingWay = redisTemplate.boundHashOps("tradingWay");
+        tradingWay.put("1","咸鱼");
+        tradingWay.put("2","面交");
+        tradingWay.put("3","其他");
     }
 }

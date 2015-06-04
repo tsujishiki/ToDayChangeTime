@@ -27,7 +27,7 @@ public class BaseDataSerImpl implements BaseDataSer {
      */
     @Override
     public List<Dictionary> getListByType(String type) {
-        List<Dictionary> dictList = new ArrayList<>();
+        List<Dictionary> dictList = new ArrayList<Dictionary>();
         Dictionary dict = null;
         BoundHashOperations boundHashOperations = redis.boundHashOps(type);
 

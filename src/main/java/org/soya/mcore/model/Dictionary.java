@@ -29,10 +29,16 @@ public class Dictionary implements Serializable,Comparable<Dictionary> {
 
     @Override
     public int compareTo(Dictionary dict) {
-        if("OTHER".equals(dict.getCode())){
-            return Integer.MAX_VALUE;
+        int flag = -1 ;
+        if("OTHER".equals(this.getCode())){
+            flag = 1;
+        }else if("OTHER".equals(dict.getCode())){
+            flag = -1;
         }else{
-            return this.getCode().compareTo(dict.getCode());
+            if(this.getCode().compareTo(dict.getCode()) > 0)
+                flag = 1;
         }
+
+        return flag;
     }
 }
