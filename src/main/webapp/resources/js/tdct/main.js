@@ -91,6 +91,14 @@ var app = angular.module("mainApp", ["ngRoute"])
             $scope.gameType = obj.data;
         }
     });
+
+    //游戏平台
+    $http.get("/ajax/baseData/platform").success(function(obj){
+        if(obj.status==Status.SUCCESS) {
+            $scope.platform = obj.data;
+        }
+    });
+
 })
 .controller("RouteDeferMsgCtl",["$scope","$http","deferMsg",function($scope,$http,deferMsg){
     $scope.deferMsg = deferMsg;
@@ -196,7 +204,6 @@ var app = angular.module("mainApp", ["ngRoute"])
 
     //监听登陆事件
     $scope.$on("onLogin",function(d,data){
-        console.log(d);
         loginInfo = data;
     });
 

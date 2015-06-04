@@ -17,12 +17,12 @@ public interface BaseDataSer {
      * @param Type
      * @return List<Dictionary>
      */
-    List<Dictionary> getListByCode(String Type);
+    List<Dictionary> getListByType(String Type);
 
     /**
      * 根据字典类型获取字典
      * @param Type
      * @return Map
      */
-    Map getMapByCode(String Type);
+    Map getMapByType(String Type);
 }

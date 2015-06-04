@@ -21,14 +21,17 @@ CREATE TABLE `db_tdct`.`business` (
   `enName` VARCHAR(45) NULL, ##英文名称
   `typeCode` VARCHAR(10) NOT NULL, ##游戏类型
   `platformCode` VARCHAR(10) NOT NULL, ##平台
+  `regionCode` VARCHAR(10) NULL, ##区域
   `price` DECIMAL(9,2) NULL, #价格
   `quality` TINYINT NOT NULL, #成色
-  `regionCode` VARCHAR(10) NULL, ##区域
   `qq` VARCHAR(15) NULL , ##qq
+  `mobilephone` VARCHAR(20) NULL ,
   `maker` VARCHAR(45) NULL, ##开发商
   `publisher` VARCHAR(45) NULL, ##发行商
+  `businessType` varchar(10) NOT NULL ,#交易类型
   `tradingWay` VARCHAR(10) NULL, ##交易方式
   `location` VARCHAR(10) NULL,##发布者所在地
+  `description` TINYTEXT NULL ,
   `createDate` TIMESTAMP NOT NULL,
   `modifyDate` TIMESTAMP NOT NULL,
   `creator` VARCHAR(10) NOT NULL,

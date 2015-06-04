@@ -32,11 +32,6 @@ public class LoginController extends BaseController {
     @ResponseBody
     public ReturnBody login(@RequestBody LoginForm form,HttpServletRequest request, HttpServletResponse response,ModelMap modelMap){
         ReturnBody rbody = new ReturnBody();
-//        if(!ValidUtil.validCaptcha(request,form.getKaptcha())){
-//            rbody.setStatus(Status.FAILED);
-//            rbody.setMsg("验证码输入错误！");
-//            return rbody;
-//        }
 
         User user = userSer.selectByName(form.getUserName());
         Map data = new HashMap();

@@ -7,9 +7,7 @@ import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 基本数据
@@ -24,14 +22,14 @@ public class BaseDataSerImpl implements BaseDataSer {
 
     /**
      * 根据字典类型获取字典
-     * @param Type
+     * @param type
      * @return List<Dictionary>
      */
     @Override
-    public List<Dictionary> getListByCode(String Type) {
+    public List<Dictionary> getListByType(String type) {
         List<Dictionary> dictList = new ArrayList<>();
         Dictionary dict = null;
-        BoundHashOperations boundHashOperations = redis.boundHashOps(Type);
+        BoundHashOperations boundHashOperations = redis.boundHashOps(type);
 
         Map<String,String> map = boundHashOperations.entries();
 
@@ -41,17 +39,20 @@ public class BaseDataSerImpl implements BaseDataSer {
             dict.setName(entry.getValue());
             dictList.add(dict);
         }
+        //取出为map无序，此处排序
+        Collections.sort(dictList);
+
         return dictList;
     }
 
     /**
      * 根据字典类型获取字典
-     * @param Type
+     * @param type
      * @return Map
      */
     @Override
-    public Map getMapByCode(String Type) {
-        BoundHashOperations boundHashOperations = redis.boundHashOps(Type);
+    public Map getMapByType(String type) {
+        BoundHashOperations boundHashOperations = redis.boundHashOps(type);
 
         Map<String,String> map = boundHashOperations.entries();
 

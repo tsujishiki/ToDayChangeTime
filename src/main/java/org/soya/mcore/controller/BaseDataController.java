@@ -23,11 +23,11 @@ public class BaseDataController extends BaseController {
     @Autowired
     BaseDataSer baseDataSer;
 
-    @RequestMapping(value = {"/baseData/{code}"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/baseData/{type}"},method = RequestMethod.GET)
     @ResponseBody
-    public ReturnBody getByCode(@PathVariable("code") String code) throws Exception {
+    public ReturnBody getByCode(@PathVariable("type") String type) throws Exception {
 
-        List<Dictionary> dictList = baseDataSer.getListByCode(code);
+        List<Dictionary> dictList = baseDataSer.getListByType(type);
         ReturnBody returnBody = new ReturnBody();
         returnBody.setStatus(Status.SUCCESS);
         returnBody.setData(dictList);

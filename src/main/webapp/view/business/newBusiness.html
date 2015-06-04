@@ -1,6 +1,91 @@
-<div>
-    <select ng-model="game.gameType" ng-options="o.code as o.name for o in gameType">
-        <option value="">请选择</option>
-    </select>
+<div class="container">
+
+    <form role="form" class="form-horizontal">
+        <fieldset>
+            <div id="legend" class="">
+                <legend class="">发布信息</legend>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">消息类型</label>
+                <div class="col-md-6 col-sm-10">
+                    <!-- Inline Radios -->
+                    <label class="radio-inline">
+                        <input type="radio" value="s" name="group" checked="checked">
+                        供
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="b" name="group">
+                        求
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">游戏名称</label>
+                <div class="col-md-6 col-sm-10">
+                    <input type="text" placeholder="必填项" class="form-control">
+                    <p class="help-block">请填写官方名称，有助于快速找到本信息</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">游戏类型</label>
+                <div class="col-md-6 col-sm-10">
+                    <select class="form-control" ng-model="game.gameType" ng-options="o.code as o.name for o in gameType">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">游戏平台</label>
+                <div class="col-md-6 col-sm-10">
+                    <select class="form-control" ng-model="game.platform" ng-options="o.code as o.name for o in platform">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">价格</label>
+                <div class="col-md-6 col-sm-10">
+                    <input type="text" placeholder="必填" class="form-control">
+                    <p class="help-block"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">成色</label>
+                <div class="col-md-6 col-sm-10">
+                    <select class="form-control">
+                        <option>Enter</option>
+                        <option>Your</option>
+                        <option>Options</option>
+                        <option>Here!</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">交易方式</label>
+                <div class="col-md-6 col-sm-10">
+                    <select class="form-control">
+                        <option>Enter</option>
+                        <option>Your</option>
+                        <option>Options</option>
+                        <option>Here!</option></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2  control-label">说明</label>
+                <div class="col-md-6 col-sm-10">
+                    <textarea type="" class="form-control"> </textarea>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
 
 </div>

@@ -20,7 +20,6 @@
     <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/service/UserSer.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/service/impl/CountrySerImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/soya/tdct/service/impl/UserSerImpl.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/test/RunData.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/resources/js/tdct/Status.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/resources/js/tdct/main.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/view/main.html" charset="UTF-8" />
