@@ -21,11 +21,11 @@ public class BaseDataSerImplTest {
 
     @Before
     public void setUp() throws Exception {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-config.xml");
-        redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
-
-        jedis = new Jedis("127.0.0.1",6379);
-        jedis.auth("12345");
+//        ApplicationContext ctx = new ClassPathXmlApplicationContext("Spring-config.xml");
+//        redisTemplate = (StringRedisTemplate)ctx.getBean("redisTemplate");
+//
+//        jedis = new Jedis("127.0.0.1",6379);
+//        jedis.auth("12345");
     }
 
     @Test

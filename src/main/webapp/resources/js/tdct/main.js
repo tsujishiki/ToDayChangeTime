@@ -33,7 +33,6 @@ var app = angular.module('mainApp', ['ngRoute'])
     };
     return statusInterceptor;
 }])
-
 /****
  *路由 模板设置
  */
@@ -65,7 +64,8 @@ var app = angular.module('mainApp', ['ngRoute'])
         })
         .when('/createBusiness', {
             templateUrl: 'view/business/newBusiness.html',
-            controller: 'RouteNewBusinessCtl'
+            controller: 'RouteNewBusinessCtl',
+            needPermission: true
         })
         .otherwise({
             redirectTo: '/'

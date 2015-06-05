@@ -54,7 +54,7 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
             Map<String, String> cookieParam = ParameterUtil.cookiesToMap(request.getCookies());
             token = cookieParam.get("token");
             userName = cookieParam.get("userName");
-            if (userName != null) {
+            if (userName != null && token != null) {
                 userName = URLDecoder.decode(userName, "utf-8");
                 user = userSer.selectByName(userName);
             }
