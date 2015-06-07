@@ -49,7 +49,7 @@ app.factory('BaseDataService',['$q','$http',function($q,$http){
         },
         autoLogin : function(){
             //自动登陆验证
-            $http.post('/ajax/checkLogin').success(function(obj){
+            $http.post('/ajax/autoLogin').success(function(obj){
                 if(obj.status==Status.SUCCESS){
                     loginInfo.hasLogin = true;
                     loginInfo.info = obj.data;

@@ -47,49 +47,10 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user == null) {
-            //自动登录验证
-            String token;
-            String userName;
-
-            Map<String, String> cookieParam = ParameterUtil.cookiesToMap(request.getCookies());
-            token = cookieParam.get("token");
-            userName = cookieParam.get("userName");
-            if (userName != null && token != null) {
-                userName = URLDecoder.decode(userName, "utf-8");
-                user = userSer.selectByName(userName);
-            }
-
-            if (requestUrl.contains("/checkLogin")) {
-                if (token != null) {
-                    if (user != null && token.equals(user.getToken())) {
-                        request.getSession().setAttribute("user", user);
-                        return true;
-                    } else {
-                        rbody.setStatus(Status.FAILED);
-                        return false;
-                    }
-                }else{
-                    rbody.setStatus(Status.FAILED);
-                    return false;
-                }
-            } else { //普通请求验证不通过转向登陆页面
-                if (token != null) {
-                    if (user != null && token.equals(user.getToken())) {
-                        request.getSession().setAttribute("user", user);
-                        return true;
-                    } else {
-                        rbody.setRedirectUrl("/login");
-                        rbody.setStatus(Status.REDIRECT);
-                        response.getWriter().print(JSON.toJSONString(rbody));
-                        return false;
-                    }
-                }else{
-                    rbody.setRedirectUrl("/login");
-                    rbody.setStatus(Status.REDIRECT);
-                    response.getWriter().print(JSON.toJSONString(rbody));
-                    return false;
-                }
-            }
+            rbody.setRedirectUrl("/login");
+            rbody.setStatus(Status.REDIRECT);
+            response.getWriter().print(JSON.toJSONString(rbody));
+            return false;
         }
         return true;
     }

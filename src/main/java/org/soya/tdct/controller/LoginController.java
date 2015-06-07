@@ -1,10 +1,12 @@
 package org.soya.tdct.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.soya.mcore.constant.Status;
 import org.soya.mcore.controller.BaseController;
 import org.soya.mcore.dto.LoginForm;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
+import org.soya.mcore.util.ParameterUtil;
 import org.soya.tdct.service.UserSer;
 import org.soya.mcore.util.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -61,14 +65,39 @@ public class LoginController extends BaseController {
         return rbody;
     }
 
-    @RequestMapping(value = {"/checkLogin"},method = RequestMethod.POST)
+    /**
+     * 自动登录验证
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = {"/autoLogin"},method = RequestMethod.POST)
     @ResponseBody
-    public ReturnBody checkLogin(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
+    public ReturnBody autoLogin(HttpServletRequest request) throws UnsupportedEncodingException {
+        String token;
+        String userName;
+        User user ;
         ReturnBody rbody = new ReturnBody();
-        rbody.setStatus(Status.SUCCESS);
-        rbody.setData(user.getNickName());
+
+        Map<String, String> cookieParam = ParameterUtil.cookiesToMap(request.getCookies());
+        token = cookieParam.get("token");
+        userName = cookieParam.get("userName");
+        if (userName != null && token != null) {
+            userName = URLDecoder.decode(userName, "utf-8");
+            user = userSer.selectByName(userName);
+
+            if (token != null) {
+                if (user != null && token.equals(user.getToken())) {
+                    request.getSession().setAttribute("user", user);
+                    rbody.setData(user.getNickName());
+                    rbody.setStatus(Status.SUCCESS);
+                } else {
+                    rbody.setStatus(Status.FAILED);
+                }
+            }else{
+                rbody.setStatus(Status.FAILED);
+            }
+        }
+
         return rbody;
     }
 

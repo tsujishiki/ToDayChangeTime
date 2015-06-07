@@ -34,8 +34,6 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
                 if(data.hasLogin){
                     $location.path("/");
                 }
-                //派发登陆事件
-                $scope.$emit('onLogin', data);
             })
         }else{
             angular.forEach($scope.loginForm,function(e){
@@ -109,15 +107,9 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
     };
 }])
 .controller('HomeController',['$scope','$location','LoginService',function($scope,$location,LoginService) {
-    var loginInfo = {};
-    $scope.loginInfo = loginInfo;
+    $scope.loginInfo = LoginService.getLoginInfo();
 
     LoginService.autoLogin();
-
-    //监听登陆事件
-    $scope.$on('onLogin',function(d,data){
-        $scope.loginInfo = data;
-    });
 
     //路由用户登陆验证
     $scope.$on('$routeChangeStart', function(scope, next, current) {
