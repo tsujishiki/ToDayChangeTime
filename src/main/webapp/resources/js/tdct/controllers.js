@@ -20,6 +20,14 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
     BaseDataService.getByType('platform').then(function(data){
         $scope.platform = data;
     });
+    //成色
+    BaseDataService.getByType('quality').then(function(data){
+        $scope.quality = data;
+    });
+    //交易方式
+    BaseDataService.getByType('tradingWay').then(function(data){
+        $scope.tradingWay = data;
+    });
 }])
 .controller('RouteDeferMsgCtl',['$scope','deferMsg',function($scope,deferMsg){
     $scope.deferMsg = deferMsg;
