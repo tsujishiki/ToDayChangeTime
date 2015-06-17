@@ -49,15 +49,19 @@ app.factory('BaseDataService',['$q','$http',function($q,$http){
         },
         autoLogin : function(){
             //自动登陆验证
+            var deferred = $q.defer();
             $http.post('/ajax/autoLogin').success(function(obj){
                 if(obj.status==Status.SUCCESS){
                     loginInfo.hasLogin = true;
                     loginInfo.info = obj.data;
                 } else{
                     loginInfo.hasLogin = false;
+                    loginInfo.info = '';
                     $.cookie('token','',{expires: -1});
                 }
+                deferred.resolve(loginInfo);
             });
+            return deferred.promise;
         },
         getLoginInfo:function(){
             return loginInfo;

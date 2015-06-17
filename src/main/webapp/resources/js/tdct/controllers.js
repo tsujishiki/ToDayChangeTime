@@ -115,16 +115,17 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
     };
 }])
 .controller('HomeController',['$scope','$location','LoginService',function($scope,$location,LoginService) {
-    $scope.loginInfo = LoginService.getLoginInfo();
+    var loginInfo = LoginService.getLoginInfo();
+    $scope.loginInfo = loginInfo;
 
-    LoginService.autoLogin();
-
-    //路由用户登陆验证
-    $scope.$on('$routeChangeStart', function(scope, next, current) {
-        var needPermission = next.$$route.needPermission;
-        if(needPermission && !LoginService.getLoginInfo().hasLogin){
-            $location.path('/login');
-        }
+    LoginService.autoLogin().then(function(data){
+        //路由权限验证
+        $scope.$on('$routeChangeStart', function(scope, next, current) {
+            var needPermission = next.$$route.needPermission;
+            if(needPermission && !LoginService.getLoginInfo().hasLogin){
+                $location.path('/login');
+            }
+        });
     });
 
     $scope.toRegister = function(){

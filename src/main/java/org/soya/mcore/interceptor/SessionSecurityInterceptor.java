@@ -1,6 +1,7 @@
 package org.soya.mcore.interceptor;
 
 import com.alibaba.fastjson.JSON;
+import org.soya.mcore.constant.Context;
 import org.soya.mcore.constant.Status;
 import org.soya.mcore.dto.ReturnBody;
 import org.soya.mcore.model.User;
@@ -45,7 +46,7 @@ public class SessionSecurityInterceptor implements HandlerInterceptor {
             }
         }
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute(Context.USER);
         if (user == null) {
             rbody.setRedirectUrl("/login");
             rbody.setStatus(Status.REDIRECT);
