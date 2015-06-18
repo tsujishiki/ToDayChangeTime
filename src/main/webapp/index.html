@@ -23,7 +23,7 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header navbar-right">
-                <div ng-show="!loginInfo.hasLogin" class="ng-hide">
+                <div ng-show="loginInfo?false:!loginInfo.hasLogin" class="ng-hide">
                     <input type="button" class="btn-link navbar-brand" ng-click="toLogin()" value="登陆">
                     <input type="button" class="btn-link navbar-brand" ng-click="toRegister()" value="注册">
                 </div>

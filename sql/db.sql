@@ -15,13 +15,13 @@ CREATE TABLE `tuser` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `db_tdct`.`business` (
+CREATE TABLE `db_tdct`.`tbusiness` (
   `bussinessId` INT NOT NULL AUTO_INCREMENT, ##ID
   `gameName` VARCHAR(100) NOT NULL, ##名称
   `enName` VARCHAR(45) NULL, ##英文名称
   `typeCode` VARCHAR(10) NOT NULL, ##游戏类型
   `platformCode` VARCHAR(10) NOT NULL, ##平台
-  `regionCode` VARCHAR(10) NULL, ##区域
+  `editionCode` VARCHAR(10) NULL, ##版本
   `price` DECIMAL(9,2) NULL, #价格
   `quality` TINYINT NOT NULL, #成色
   `qq` VARCHAR(15) NULL , ##qq

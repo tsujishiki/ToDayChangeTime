@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <!--实体类别名 Country -->
         <typeAlias type="org.soya.tdct.model.Country" alias="Country" />
         <typeAlias type="org.soya.mcore.model.User" alias="User" />
+        <typeAlias type="org.soya.tdct.model.Business" alias="Business" />
     </typeAliases>  
     
 </configuration>

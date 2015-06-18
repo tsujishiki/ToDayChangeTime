@@ -11,7 +11,7 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
 .controller('RouteErrorCtl',function($scope,$http){
 
 })
-.controller('RouteNewBusinessCtl',['$scope','BaseDataService',function($scope,BaseDataService){
+.controller('RouteNewBusinessCtl',['$scope','BaseDataService','BusinessService',function($scope,BaseDataService,BusinessService){
     //游戏类型
     BaseDataService.getByType('gameType').then(function(data){
         $scope.gameType = data;
@@ -28,6 +28,18 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
     BaseDataService.getByType('tradingWay').then(function(data){
         $scope.tradingWay = data;
     });
+    //版本
+    BaseDataService.getByType('edition').then(function(data){
+        $scope.edition = data;
+    });
+
+    var businessForm = {};
+    $scope.businessForm = businessForm;
+
+    $scope.add = function(){
+        BusinessService.add(businessForm);
+    };
+
 }])
 .controller('RouteDeferMsgCtl',['$scope','deferMsg',function($scope,deferMsg){
     $scope.deferMsg = deferMsg;

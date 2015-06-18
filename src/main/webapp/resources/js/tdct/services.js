@@ -86,3 +86,14 @@ app.factory('BaseDataService',['$q','$http',function($q,$http){
        }
    }
 }])
+.factory("BusinessService",['$q','$http',function($q,$http){
+    return{
+        add : function(business){
+            var deferred = $q.defer();
+            $http.post('/ajax/business/add',business).success(function(data){
+                deferred.resolve(data);
+            });
+            return deferred.promise;
+        }
+    }
+}])
