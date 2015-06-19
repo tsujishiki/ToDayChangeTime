@@ -128,7 +128,6 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
 }])
 .controller('HomeController',['$scope','$location','LoginService',function($scope,$location,LoginService) {
     var loginInfo = LoginService.getLoginInfo();
-    $scope.loginInfo = loginInfo;
 
     LoginService.autoLogin().then(function(data){
         //路由权限验证
@@ -138,6 +137,8 @@ app.controller('RouteMainCtl',['$scope','$location',function($scope,$location){
                 $location.path('/login');
             }
         });
+
+        $scope.loginInfo = loginInfo;
     });
 
     $scope.toRegister = function(){

@@ -15,7 +15,7 @@ app.factory('BaseDataService',['$q','$http',function($q,$http){
     }
 }])
 .factory('LoginService',['$q','$http',function($q,$http){
-    var loginInfo = {};
+    var loginInfo = {hasLogin:false};
     return {
         login:function(form){
             var deferred = $q.defer();
